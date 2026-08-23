@@ -1,0 +1,65 @@
+---
+import { t, type Lang } from '../../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tr = t(lang);
+
+// Prosa som bara finns på den här sidan hålls här i stället för i ui.ts —
+// ui.ts är till för korta återkommande etiketter, inte hela stycken.
+const copy = {
+  sv: {
+    intro:
+      'Jag heter Martin och driver Appfinningar, där jag bygger webbtjänster och mobilappar. Det som ligger under Projekt är inte skisser eller kursuppgifter — det är saker som är i drift och går att klicka sig in i och prova.',
+    workHeading: 'Vad jag arbetar med',
+    backgroundHeading: 'Bakgrund',
+    contactHeading: 'Kontakt',
+    contact:
+      'Snabbast via mejl. Jag svarar på allt, även på sådant som visar sig inte leda någonstans.',
+    todoWork:
+      'Fyll i här: vilka språk, ramverk och verktyg du faktiskt arbetar i, och vad du helst vill jobba med. Var konkret — "React, TypeScript, Flutter, Cloudflare Workers" säger något; "webbutveckling" säger ingenting till den som söker efter en viss kompetens.',
+    todoBackground:
+      'Fyll i här: utbildning, tidigare arbeten eller den väg som tog dig hit. Om du bytt bana är det oftast värt att skriva ut varför — det är en fråga varje rekryterare ändå kommer att ställa, och du svarar bättre på den här än i ett nervöst samtal.',
+    todoCv:
+      'Vill du ha ett nedladdningsbart CV: lägg PDF:en i public/ som cv-martin.pdf, så länkar jag in den härifrån. CV Forge kan ju exportera den åt dig.',
+  },
+  en: {
+    intro:
+      'I am Martin, and I run Appfinningar, where I build web services and mobile apps. What sits under Projects are not sketches or coursework — they are running, and you can click in and try them.',
+    workHeading: 'What I work with',
+    backgroundHeading: 'Background',
+    contactHeading: 'Contact',
+    contact:
+      'Email is fastest. I answer everything, including the things that turn out to lead nowhere.',
+    todoWork:
+      'Fill in here: the languages, frameworks and tools you actually work in, and what you would most like to work with. Be concrete — "React, TypeScript, Flutter, Cloudflare Workers" says something; "web development" says nothing to someone searching for a particular skill.',
+    todoBackground:
+      'Fill in here: education, previous work, or the path that brought you here. If you changed careers it is usually worth spelling out why — every recruiter will ask anyway, and you answer it better here than in a nervous interview.',
+    todoCv:
+      'Want a downloadable CV? Put the PDF in public/ as cv-martin.pdf and I will link it from here. CV Forge can export it for you.',
+  },
+}[lang];
+---
+
+<h1>{tr('about.heading')}</h1>
+
+<div class="prose">
+  <p class="lede">{copy.intro}</p>
+
+  <h2 class="section-heading">{copy.workHeading}</h2>
+  <!-- TODO Martin: ersätt rutan nedan med din egen text och ta bort .todo-blocket. -->
+  <p class="todo"><strong>Att fylla i.</strong> {copy.todoWork}</p>
+
+  <h2 class="section-heading">{copy.backgroundHeading}</h2>
+  <!-- TODO Martin: ersätt rutan nedan med din egen text och ta bort .todo-blocket. -->
+  <p class="todo"><strong>Att fylla i.</strong> {copy.todoBackground}</p>
+  <p class="todo"><strong>Valfritt.</strong> {copy.todoCv}</p>
+
+  <h2 class="section-heading">{copy.contactHeading}</h2>
+  <p><span class="badge">{tr('contact.available')}</span></p>
+  <p>{copy.contact}</p>
+  <ul>
+    <li><a href="mailto:martin@appfinningar.se">martin@appfinningar.se</a></li>
+    <li><a href="https://github.com/SayMartin" rel="me">github.com/SayMartin</a></li>
+  </ul>
+</div>

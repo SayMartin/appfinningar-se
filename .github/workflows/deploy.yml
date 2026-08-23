@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# A push while a deploy is running should supersede it, not race it.
+# En push medan en deploy pågår ska ersätta den, inte tävla med den.
 concurrency:
   group: pages-deploy
   cancel-in-progress: true
@@ -16,13 +16,22 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      # The site is plain static files — nothing to build. wrangler uploads
-      # `public/` as-is into the existing Direct Upload project, so the custom
-      # domain keeps pointing at the same project throughout.
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      # npm ci installerar exakt det som står i package-lock.json. Bygget på
+      # servern får alltså samma versioner som du testat lokalt.
+      - run: npm ci
+
+      # Astro skriver färdig HTML till dist/, och optimerar bilderna på vägen.
+      - run: npm run build
+
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy public --project-name=appfinningar --branch=main
+          command: pages deploy dist --project-name=appfinningar --branch=main

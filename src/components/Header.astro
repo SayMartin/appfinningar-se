@@ -1,0 +1,54 @@
+---
+import { t, routes, type Lang, type RouteKey } from '../i18n/ui';
+
+interface Props { lang: Lang; current: RouteKey }
+const { lang, current } = Astro.props;
+const tr = t(lang);
+
+const nav: { key: RouteKey; label: string }[] = [
+  { key: 'home', label: tr('nav.home') },
+  { key: 'photos', label: tr('nav.photos') },
+  { key: 'about', label: tr('nav.about') },
+];
+
+const other: Lang = lang === 'sv' ? 'en' : 'sv';
+---
+
+<header class="site-header">
+  <a class="brand" href={routes.home[lang]}>{tr('site.name')}</a>
+
+  <nav aria-label={tr('site.name')}>
+    {nav.map(({ key, label }) => (
+      <a href={routes[key][lang]} aria-current={key === current ? 'page' : undefined}>{label}</a>
+    ))}
+    <!-- Skickar till samma sida på andra språket, inte till förstasidan. -->
+    <a class="lang" href={routes[current][other]} lang={other} hreflang={other} title={tr('nav.language')}>
+      {other === 'en' ? 'EN' : 'SV'}
+    </a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    justify-content: space-between; gap: 1rem;
+    padding-bottom: 1.5rem; margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    font-size: .78rem; font-weight: 600; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent); text-decoration: none;
+  }
+  nav { display: flex; align-items: baseline; gap: 1.4rem; }
+  nav a {
+    font-size: .95rem; color: var(--muted); text-decoration: none;
+    padding-bottom: .2rem; border-bottom: 1px solid transparent;
+  }
+  nav a:hover { color: var(--text); }
+  nav a[aria-current='page'] { color: var(--text); border-bottom-color: var(--accent); }
+  .lang {
+    font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+    border: 1px solid var(--border); border-radius: 999px; padding: .2rem .6rem;
+  }
+  .lang:hover { border-color: var(--accent); }
+</style>

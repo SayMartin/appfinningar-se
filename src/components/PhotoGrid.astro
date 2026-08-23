@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { t, type Lang } from '../i18n/ui';
+import { captions, fallbackAlt } from '../data/photos';
+
+interface Props {
+  lang: Lang;
+  /** Visa bara de N första — används för urvalet på förstasidan. */
+  limit?: number;
+}
+const { lang, limit } = Astro.props;
+const tr = t(lang);
+
+// Bilderna plockas upp automatiskt ur mappen. Martin lägger in en fil och den
+// finns på sajten nästa bygge — ingen lista att komma ihåg att uppdatera.
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/photos/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true },
+);
+
+const all = Object.entries(modules)
+  .map(([path, mod]) => {
+    const filename = path.split('/').pop()!;
+    return { filename, image: mod.default, alt: captions[filename]?.[lang] ?? fallbackAlt(filename) };
+  })
+  .sort((a, b) => a.filename.localeCompare(b.filename));
+
+for (const photo of all) {
+  if (!captions[photo.filename]) {
+    console.warn(`[foto] ${photo.filename} saknar alt-text — lägg till den i src/data/photos.ts`);
+  }
+}
+
+const photos = limit ? all.slice(0, limit) : all;
+---
+
+{photos.length === 0 ? (
+  <p class="todo">{tr('photos.empty')}</p>
+) : (
+  <ul class="grid">
+    {photos.map(({ image, alt }) => (
+      <li>
+        {/* widths + sizes gör att mobilen laddar en 400px-variant i stället för
+            originalet. Astro genererar varianterna vid bygget. */}
+        <Image
+          src={image}
+          alt={alt}
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 22rem"
+          format="webp"
+          quality={80}
+          loading="lazy"
+          decoding="async"
+        />
+        {alt && <span class="caption">{alt}</span>}
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  }
+  li { margin: 0; }
+  img {
+    width: 100%; height: auto; display: block;
+    border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .caption {
+    display: block; margin-top: .5rem;
+    font-size: .86rem; color: var(--muted);
+  }
+</style>

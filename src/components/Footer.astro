@@ -1,0 +1,27 @@
+---
+import { t, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tr = t(lang);
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <p>
+    <a href="mailto:martin@appfinningar.se">martin@appfinningar.se</a>
+    <span class="sep">·</span>
+    <a href="https://github.com/SayMartin" rel="me">github.com/SayMartin</a>
+  </p>
+  <p class="fine">&copy; {year} {tr('footer.rights')} · {tr('footer.builtWith')}</p>
+</footer>
+
+<style>
+  footer {
+    margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    font-size: .9rem; color: var(--muted);
+  }
+  footer p { margin: 0 0 .4rem; }
+  .sep { margin: 0 .5rem; opacity: .5; }
+  .fine { font-size: .84rem; opacity: .8; }
+</style>

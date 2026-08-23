@@ -1,0 +1,40 @@
+---
+import ProjectCard from '../ProjectCard.astro';
+import PhotoGrid from '../PhotoGrid.astro';
+import { t, routes, type Lang } from '../../i18n/ui';
+import { projects } from '../../data/projects';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tr = t(lang);
+---
+
+<div class="intro">
+  <h1>{tr('home.h1')}</h1>
+  <p class="lede">{tr('home.lede')}</p>
+  <p class="avail"><span class="badge">{tr('contact.available')}</span></p>
+</div>
+
+<h2 class="section-heading">{tr('projects.heading')}</h2>
+{projects.map((project) => <ProjectCard project={project} lang={lang} />)}
+
+<h2 class="section-heading">{tr('photos.heading')}</h2>
+<p class="lede photo-lede">{tr('photos.lede')}</p>
+<PhotoGrid lang={lang} limit={6} />
+<p class="more"><a href={routes.photos[lang]}>{tr('photos.seeAll')} &rarr;</a></p>
+
+<h2 class="section-heading">{tr('about.heading')}</h2>
+<p class="lede">{tr('contact.lede')}</p>
+<p class="more">
+  <a href={routes.about[lang]}>{tr('about.readMore')} &rarr;</a>
+  <span class="sep">·</span>
+  <a href="mailto:martin@appfinningar.se">{tr('contact.email')}</a>
+</p>
+
+<style>
+  .intro { margin-bottom: 1rem; }
+  .avail { margin: 1.5rem 0 0; }
+  .photo-lede { margin-bottom: 1.2rem; }
+  .more { margin-top: 1.2rem; font-size: .95rem; }
+  .sep { margin: 0 .5rem; opacity: .5; color: var(--muted); }
+</style>

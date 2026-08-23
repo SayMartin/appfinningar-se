@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import AboutBody from '../components/bodies/AboutBody.astro';
+import { t } from '../i18n/ui';
+
+const lang = 'sv' as const;
+const tr = t(lang);
+---
+
+<Base lang={lang} current="about" title={tr('about.title')} description={tr('about.description')}>
+  <AboutBody lang={lang} />
+</Base>

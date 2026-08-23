@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import PhotosBody from '../components/bodies/PhotosBody.astro';
+import { t } from '../i18n/ui';
+
+const lang = 'sv' as const;
+const tr = t(lang);
+---
+
+<Base lang={lang} current="photos" title={tr('photos.title')} description={tr('photos.description')}>
+  <PhotosBody lang={lang} />
+</Base>

@@ -1,0 +1,94 @@
+/* Färgerna är desamma som den handskrivna landningssidan hade — sajten växer,
+   men den ska inte se ut som en annan sajt för den som varit här förut. */
+:root {
+  --bg: #f7f8f5;
+  --surface: #ffffff;
+  --border: #e2e6dc;
+  --text: #1e241c;
+  --muted: #5c6659;
+  --accent: #4a7a3f;
+  --accent-hov: #3a6231;
+  --radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14180f;
+    --surface: #1c2118;
+    --border: #2e3628;
+    --text: #eef1ea;
+    --muted: #9aa693;
+    --accent: #8fa87a;
+    --accent-hov: #a7bd93;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 46rem; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-hov); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Syns bara för den som tabbar sig in på sidan. */
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--surface); color: var(--text);
+  padding: .6rem 1rem; border-radius: var(--radius); border: 1px solid var(--accent);
+}
+.skip:focus { left: 1rem; top: 1rem; z-index: 10; }
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  line-height: 1.15; margin: 0 0 1rem; letter-spacing: -.02em;
+}
+
+.lede { font-size: 1.08rem; color: var(--muted); margin: 0; max-width: 34rem; }
+
+.section-heading {
+  font-size: .78rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted);
+  margin: 3rem 0 1.1rem; padding-bottom: .7rem; border-bottom: 1px solid var(--border);
+}
+
+.tag {
+  display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: .12rem .55rem; margin-left: .5rem; vertical-align: 2px;
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .84rem; font-weight: 500; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 999px; padding: .3rem .85rem;
+}
+.badge::before {
+  content: ''; width: .5rem; height: .5rem; border-radius: 50%;
+  background: var(--accent); flex: none;
+}
+
+.prose p { color: var(--muted); max-width: 36rem; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose h3 { margin: 2rem 0 .5rem; font-size: 1.05rem; letter-spacing: -.01em; }
+.prose ul { color: var(--muted); max-width: 36rem; padding-left: 1.2rem; }
+.prose li { margin-bottom: .4rem; }
+
+/* Ifyllnadsmarkör för texter Martin ska skriva själv. Går inte att missa i
+   webbläsaren, och försvinner i samma stund som innehållet ersätts. */
+.todo {
+  border-left: 3px solid #c9a227; background: color-mix(in srgb, #c9a227 8%, transparent);
+  padding: .8rem 1rem; border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: .94rem; color: var(--muted); max-width: 36rem;
+}
+.todo strong { color: var(--text); }

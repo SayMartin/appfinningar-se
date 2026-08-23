@@ -1,0 +1,19 @@
+---
+import PhotoGrid from '../PhotoGrid.astro';
+import { t, type Lang } from '../../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tr = t(lang);
+---
+
+<h1>{tr('photos.heading')}</h1>
+<p class="lede">{tr('photos.lede')}</p>
+
+<div class="gallery">
+  <PhotoGrid lang={lang} />
+</div>
+
+<style>
+  .gallery { margin-top: 2.5rem; }
+</style>

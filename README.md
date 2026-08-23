@@ -1,52 +1,74 @@
 # appfinningar.se
 
-The landing page at the apex domain. One static HTML file, no build step, no
-dependencies — all CSS is inline so the page is a single request.
+Portfolio och projektsajt för Martin. Statisk sajt byggd med [Astro](https://astro.build),
+driftad på Cloudflare Pages, på svenska och engelska.
 
-Its job is not decoration: it is the only page that links to the subdomains
-(`cv-forge`, `wordlune`, `school-cms-demo`). Without those links none of them
-is reachable by a crawler, because nothing else on the web points at them.
+## Kom igång
 
-## Layout
-
-```
-public/index.html          the entire site
-.github/workflows/deploy.yml
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # skriver till dist/
+npm run preview  # visar dist/ som den kommer se ut i drift
 ```
 
-Everything served must live under `public/`. Deploying the repo root would
-publish `.github/workflows/deploy.yml` as a fetchable file on the site.
+Kräver Node 22.12 eller senare.
+
+## Struktur
+
+| Sökväg | Innehåll |
+|---|---|
+| `src/pages/` | En fil per sida. Svenska i roten, engelska under `en/`. |
+| `src/components/bodies/` | Sidinnehållet, delat mellan språken — en komponent per sida, inte per språk. |
+| `src/i18n/ui.ts` | Alla korta texter och etiketter, båda språken. Även sidkartan `routes`. |
+| `src/data/projects.ts` | Projektkorten. Lägg till ett projekt här och det dyker upp på båda språken. |
+| `src/data/photos.ts` | Alt-texter till bilderna. |
+| `src/assets/photos/` | Bildfilerna. Se README:n i mappen. |
+| `public/` | Filer som kopieras rakt igenom orörda: favicon, robots.txt, ett eventuellt CV. |
+
+## Vanliga ändringar
+
+**Lägg till ett projekt** — ett objekt i `src/data/projects.ts`. Utelämna `repo`
+om koden inte är publik, så visas ingen källkodslänk. Utelämna `tag` om projektet
+är i skarp drift.
+
+**Lägg till bilder** — släpp filerna i `src/assets/photos/` i full upplösning och
+skriv alt-text i `src/data/photos.ts`. Bygget varnar för bilder som saknar alt-text.
+
+**Lägg till en sida** — skapa filen i både `src/pages/` och `src/pages/en/`, och
+lägg till den i `routes` i `src/i18n/ui.ts`. Då hittar språkväxlaren rätt
+motsvarighet i stället för att kasta besökaren till förstasidan.
+
+**Ändra en text** — nästan allt kort ligger i `src/i18n/ui.ts`. Längre prosa ligger
+i respektive `bodies/`-komponent.
+
+## Språk
+
+Svenska ligger i roten (`/`, `/om/`, `/foto/`), engelska under `/en/`. Sidorna
+länkar till varandra med `hreflang`, så Google förstår att de är översättningar
+och inte dubblettinnehåll. `x-default` pekar på svenska.
 
 ## Deploy
 
-Push to `main`. The workflow runs `wrangler pages deploy public` against the
-Cloudflare Pages project **`appfinningar`**.
+Push till `main` bygger och laddar upp automatiskt via GitHub Actions.
 
-That project was created through the dashboard as a **Direct Upload** project,
-which is why this repo deploys with `wrangler` instead of using Pages' built-in
-Git integration. A Direct Upload project cannot be converted to a Git-connected
-one; switching would mean a new project and re-pointing the custom domain, with
-the site down in between. Deploying into the existing project avoids that
-entirely.
+Två secrets måste finnas i repot (Settings → Secrets and variables → Actions):
 
-### Required GitHub secrets
+| Namn | Värde |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare-token med behörigheten Account · Cloudflare Pages · Edit |
+| `CLOUDFLARE_ACCOUNT_ID` | `CLOUDFLARE_ACCOUNT_ID` |
 
-| Secret | Where it comes from |
-| ------ | ------------------- |
-| `CLOUDFLARE_API_TOKEN` | Cloudflare → My Profile → API Tokens → Create Token → **Cloudflare Pages: Edit** |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard URL: `dash.cloudflare.com/<account-id>/…` |
+Saknas de misslyckas jobbet med `it's necessary to set a CLOUDFLARE_API_TOKEN
+environment variable`. Loggens `with:`-block visar då bara `command:` — det är
+sättet att se att en secret saknas snarare än är felaktig.
 
-### Verifying a deploy landed on production
+### Det som är värt att kontrollera efter första deployen
 
-Check the Pages project's **Deployments** tab: the run must be labelled
-**Production**, not Preview. A preview deployment succeeds, reports green in
-Actions, and leaves `appfinningar.se` serving the previous version — the most
-confusing way for this to go wrong. If it says Preview, the project's
-production branch does not match `--branch=main` in the workflow.
+Uppladdningen sker med `--branch=main`. Heter Pages-projektets produktionsgren
+något annat blir resultatet en **preview-deployment**: Actions lyser grönt,
+wrangler rapporterar lyckat, och appfinningar.se fortsätter servera den gamla
+versionen. Det är det mest förvirrande sättet det här kan misslyckas på.
 
-## DNS
-
-`appfinningar.se` and `www.appfinningar.se` are Pages custom domains on this
-project. Mail is unrelated and stays with Strato — the `MX`, SPF, DKIM, DMARC
-and autodiscover records must not be touched when changing where the site is
-hosted.
+Kontrollera i Cloudflare → Pages → appfinningar → Deployments att den nya raden
+är märkt **Production**, inte Preview.
