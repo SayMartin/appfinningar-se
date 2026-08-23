@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appfinningar — appar och webbtjänster av Martin</title>
+<meta name="description" content="Appfinningar bygger små, egna appar och webbtjänster: CV Forge för att skapa och exportera CV:n, ordspelet Wordlune, och ett publiceringssystem för folkhögskolor.">
+<link rel="canonical" href="https://appfinningar.se/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Appfinningar">
+<meta property="og:title" content="Appfinningar — appar och webbtjänster av Martin">
+<meta property="og:description" content="Appfinningar bygger små, egna appar och webbtjänster: CV Forge för att skapa och exportera CV:n, ordspelet Wordlune, och ett publiceringssystem för folkhögskolor.">
+<meta property="og:url" content="https://appfinningar.se/">
+<meta property="og:locale" content="sv_SE">
+<style>
+  :root {
+    --bg: #f7f8f5;
+    --surface: #ffffff;
+    --border: #e2e6dc;
+    --text: #1e241c;
+    --muted: #5c6659;
+    --accent: #4a7a3f;
+    --accent-hov: #3a6231;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14180f;
+      --surface: #1c2118;
+      --border: #2e3628;
+      --text: #eef1ea;
+      --muted: #9aa693;
+      --accent: #8fa87a;
+      --accent-hov: #a7bd93;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 4.5rem 1.5rem 3rem; }
+  header { margin-bottom: 3rem; }
+  .brand {
+    font-size: .78rem; font-weight: 600; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 .9rem;
+  }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; letter-spacing: -.02em; }
+  .lede { font-size: 1.08rem; color: var(--muted); margin: 0; max-width: 34rem; }
+  h2 {
+    font-size: .78rem; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 0 0 1.1rem; padding-bottom: .7rem; border-bottom: 1px solid var(--border);
+  }
+  .card {
+    display: block; padding: 1.4rem 1.5rem; margin-bottom: 1rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    text-decoration: none; color: inherit;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .card:hover, .card:focus-visible { border-color: var(--accent); transform: translateY(-2px); }
+  .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .card h3 { margin: 0 0 .4rem; font-size: 1.18rem; color: var(--accent); letter-spacing: -.01em; }
+  .card p { margin: 0 0 .6rem; color: var(--muted); font-size: .96rem; }
+  .card p strong { color: var(--text); font-weight: 600; }
+  .card .host { font-size: .84rem; color: var(--muted); opacity: .8; font-variant-numeric: tabular-nums; }
+  .tag {
+    display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px; padding: .12rem .55rem; margin-left: .5rem;
+    vertical-align: 2px;
+  }
+  footer {
+    margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    font-size: .9rem; color: var(--muted);
+  }
+  footer a { color: var(--accent); }
+  footer a:hover { color: var(--accent-hov); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="brand">Appfinningar</p>
+    <h1>Små appar, byggda för att faktiskt användas.</h1>
+    <p class="lede">
+      Appfinningar är mitt eget utvecklingsprojekt — webbtjänster och mobilappar
+      som börjar i ett konkret behov och byggs färdiga i stället för att stanna
+      som idé. Här är det som är igång just nu.
+    </p>
+  </header>
+
+  <main>
+    <h2>Projekt</h2>
+
+    <a class="card" href="https://cv-forge.appfinningar.se/">
+      <h3>CV Forge</h3>
+      <p>
+        Ett verktyg för att skapa, hantera och exportera CV:n. Du lägger in dina
+        erfarenheter, utbildningar och färdigheter en gång, och sätter sedan ihop
+        olika CV:n av samma innehåll — med egna färger, valfri layout och
+        utskriftsfärdig PDF. Har du redan ett CV som PDF kan det importeras och
+        läsas in automatiskt.
+      </p>
+      <span class="host">cv-forge.appfinningar.se</span>
+    </a>
+
+    <!-- TODO Martin: skriv om beskrivningen nedan till vad Wordlune faktiskt är.
+         Jag vet bara namnet, så texten är medvetet vag — och en vag beskrivning
+         är precis det som gör en sökträff värdelös. -->
+    <a class="card" href="https://wordlune.appfinningar.se/">
+      <h3>Wordlune <span class="tag">Beta</span></h3>
+      <p>
+        Ett ordspel för webben och mobilen, just nu i en tidig testversion för
+        en mindre krets. Släpps på Google Play när det är färdigt.
+      </p>
+      <span class="host">wordlune.appfinningar.se</span>
+    </a>
+
+    <a class="card" href="https://school-cms-demo.appfinningar.se/">
+      <h3>School CMS <span class="tag">Demo</span></h3>
+      <p>
+        Ett publiceringssystem för folkhögskolor och mindre utbildningsanordnare:
+        kurser, personal och nyheter som redigeras direkt i webbläsaren, utan att
+        någon behöver röra kod. Sajten bakom länken är en fungerande demo med
+        <strong>påhittat innehåll</strong> — "Demo Folk High School" är ingen riktig
+        skola, utan finns till för att visa hur systemet ser ut i drift.
+      </p>
+      <span class="host">school-cms-demo.appfinningar.se</span>
+    </a>
+  </main>
+
+  <footer>
+    <p>
+      Frågor eller synpunkter? Mejla
+      <a href="mailto:martin@appfinningar.se">martin@appfinningar.se</a>.
+    </p>
+    <p>&copy; <span id="y">2026</span> Appfinningar</p>
+  </footer>
+
+</div>
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
