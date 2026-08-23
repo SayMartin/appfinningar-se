@@ -30,8 +30,10 @@ jobs:
       # Astro skriver färdig HTML till dist/, och optimerar bilderna på vägen.
       - run: npm run build
 
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Utan den här raden installerar actionen en gammal wrangler (3.90.0).
+          wranglerVersion: '4.125.0'
           command: pages deploy dist --project-name=appfinningar --branch=main
