@@ -58,7 +58,7 @@ export const ui = {
     'contact.lede':
       'Letar du efter någon som bygger färdigt? Hör av dig — jag svarar på allt.',
 
-    'footer.rights': 'Appfinningar',
+    'footer.holder': 'Martin Persson · appfinningar.se',
     'footer.builtWith': 'Byggd med Astro, driftad på Cloudflare Pages.',
   },
 
@@ -103,7 +103,7 @@ export const ui = {
     'contact.lede':
       "Looking for someone who finishes what they start? Get in touch — I answer everything.",
 
-    'footer.rights': 'Appfinningar',
+    'footer.holder': 'Martin Persson · appfinningar.se',
     'footer.builtWith': 'Built with Astro, hosted on Cloudflare Pages.',
   },
 } as const;
