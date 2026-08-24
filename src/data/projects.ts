@@ -19,7 +19,7 @@ export const projects: Project[] = [
     name: 'CV Forge',
     url: 'https://cv-forge.appfinningar.se/',
     host: 'cv-forge.appfinningar.se',
-    repo: 'https://github.com/SayMartin/cv-forge',
+    // repo: 'https://github.com/SayMartin/cv-forge',
     description: {
       sv: 'Ett verktyg för att skapa, hantera och exportera CV:n. Du lägger in dina erfarenheter, utbildningar och färdigheter en gång, och sätter sedan ihop olika CV:n av samma innehåll — med egna färger, valfri layout och utskriftsfärdig PDF. Har du redan ett CV som PDF kan det importeras och läsas in automatiskt.',
       en: 'A tool for creating, managing and exporting CVs. You enter your experience, education and skills once, then assemble different CVs from the same content — with your own colours, a layout of your choosing and a print-ready PDF. Already have a CV as a PDF? It can be imported and parsed automatically.',
@@ -32,10 +32,10 @@ export const projects: Project[] = [
   {
     id: 'wordlune',
     name: 'Wordlune',
-    tag: { sv: 'Beta', en: 'Beta' },
+    // tag: { sv: 'Beta', en: 'Beta' },
     url: 'https://wordlune.appfinningar.se/',
     host: 'wordlune.appfinningar.se',
-    repo: 'https://github.com/SayMartin/Wordlune',
+    // repo: 'https://github.com/SayMartin/Wordlune',
     description: {
       sv: 'Ett ordspel för webben och mobilen, just nu i en tidig testversion för en mindre krets. Släpps på Google Play när det är färdigt.',
       en: 'A word game for web and mobile, currently in an early test release for a small group. Coming to Google Play once it is finished.',
