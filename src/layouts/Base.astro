@@ -49,8 +49,9 @@ const enUrl = new URL(routes[current].en, Astro.site);
 <body>
   <a class="skip" href="#main">{tr('nav.skipToContent')}</a>
 
+  <Header lang={lang} current={current} />
+
   <div class="wrap">
-    <Header lang={lang} current={current} />
     <main id="main">
       <slot />
     </main>

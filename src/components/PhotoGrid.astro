@@ -63,14 +63,18 @@ const photos = limit ? all.slice(0, limit) : all;
   .grid {
     list-style: none; margin: 0; padding: 0;
     display: grid; gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
   }
   li { margin: 0; }
+  li { position: relative; }
   img {
     width: 100%; height: auto; display: block;
-    border-radius: var(--radius); border: 1px solid var(--border);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
     background: var(--surface);
+    transition: transform .3s ease, border-color .3s ease;
   }
+  li:hover img { transform: scale(1.015); border-color: var(--border-hov); }
   .caption {
     display: block; margin-top: .5rem;
     font-size: .86rem; color: var(--muted);
