@@ -8,12 +8,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer>
-  <p>
-    <a href="mailto:martin@appfinningar.se">martin@appfinningar.se</a>
-    <span class="sep">·</span>
-    <a href="https://github.com/SayMartin" rel="me">github.com/SayMartin</a>
-  </p>
-  <p class="fine">&copy; {year} {tr('footer.holder')} · {tr('footer.builtWith')}</p>
+  <h2 class="fine">&copy; {year} {tr('footer.holder')}  <a href="https://appfinningar.se" rel="me">appfinningar.se</a></h2>
 </footer>
 
 <style>
@@ -22,6 +17,5 @@ const year = new Date().getFullYear();
     font-size: .9rem; color: var(--muted);
   }
   footer p { margin: 0 0 .4rem; }
-  .sep { margin: 0 .5rem; opacity: .5; }
   .fine { font-size: .84rem; opacity: .8; }
 </style>

@@ -23,20 +23,19 @@ export const ui = {
 
     'nav.home': 'Projekt',
     'nav.about': 'Om mig',
-    'nav.photos': 'Foto',
+    // 'nav.photos': 'Foto',
     'nav.skipToContent': 'Hoppa till innehållet',
     'nav.language': 'Byt språk',
 
     'home.title': 'Appfinningar — appar och webbtjänster av Martin',
     'home.description':
-      'Portfolio för Martin: CV Forge för att skapa och exportera CV:n, ordspelet Wordlune, och ett publiceringssystem för folkhögskolor. Plus egna foton.',
+      'Portfolio för Martin: CV Forge för att skapa och exportera CV:n, ordspelet Wordlune, och ett publiceringssystem för folkhögskolor.',
     'home.h1': 'Små appar, byggda för att faktiskt användas.',
     'home.lede':
       'Jag heter Martin och bygger webbtjänster och mobilappar som börjar i ett konkret behov och blir färdiga i stället för att stanna som idé. Här är det som är igång just nu.',
 
     'projects.heading': 'Projekt',
     'projects.visit': 'Besök sajten',
-    'projects.repo': 'Källkod',
 
     'photos.heading': 'Foto',
     'photos.lede': 'Bilder jag tagit.',
@@ -58,8 +57,7 @@ export const ui = {
     'contact.lede':
       'Letar du efter någon som bygger färdigt? Hör av dig — jag svarar på allt.',
 
-    'footer.holder': 'Martin Persson · appfinningar.se',
-    'footer.builtWith': 'Byggd med Astro, driftad på Cloudflare Pages.',
+    'footer.holder': 'Martin Persson · appfinningar.se'
   },
 
   en: {
@@ -68,7 +66,7 @@ export const ui = {
 
     'nav.home': 'Projects',
     'nav.about': 'About',
-    'nav.photos': 'Photos',
+    // 'nav.photos': 'Photos',
     'nav.skipToContent': 'Skip to content',
     'nav.language': 'Change language',
 
@@ -81,7 +79,6 @@ export const ui = {
 
     'projects.heading': 'Projects',
     'projects.visit': 'Visit site',
-    'projects.repo': 'Source code',
 
     'photos.heading': 'Photography',
     'photos.lede': 'Pictures I have taken.',
@@ -103,9 +100,7 @@ export const ui = {
     'contact.lede':
       "Looking for someone who finishes what they start? Get in touch — I answer everything.",
 
-    'footer.holder': 'Martin Persson · appfinningar.se',
-    'footer.builtWith': 'Built with Astro, hosted on Cloudflare Pages.',
-  },
+    'footer.holder': 'Martin Persson · '  },
 } as const;
 
 export function t(lang: Lang) {
