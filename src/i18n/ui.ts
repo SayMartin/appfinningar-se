@@ -20,6 +20,7 @@ export const ui = {
   sv: {
     "site.name": "Appfinningar",
     "site.tagline": "Appar och webbtjänster av Martin",
+    "site.stage": "Under uppbyggnad",
 
     "nav.home": "Projekt",
     "nav.about": "Om mig",
@@ -63,6 +64,7 @@ export const ui = {
   en: {
     "site.name": "Appfinningar",
     "site.tagline": "Apps and web services by Martin",
+    "site.stage": "Work in progress",
 
     "nav.home": "Projects",
     "nav.about": "About",

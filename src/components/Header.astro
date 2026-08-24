@@ -20,11 +20,12 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href={routes.home[lang]}>
-      {/* Samma märke som favicon, inlagt i HTML:en i stället för som <img> —
-          slipper ett extra anrop och skalar utan att bli suddigt. Dekorativt:
-          länkens text är ordet bredvid, så den döljs för skärmläsare. */}
-      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <div class="brand-group">
+      <a class="brand" href={routes.home[lang]}>
+        {/* Samma märke som favicon, inlagt i HTML:en i stället för som <img> —
+            slipper ett extra anrop och skalar utan att bli suddigt. Dekorativt:
+            länkens text är ordet bredvid, så den döljs för skärmläsare. */}
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="brandMark" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stop-color="#3d8bfd" />
@@ -34,13 +35,20 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
         <rect width="32" height="32" rx="7" fill="url(#brandMark)" />
         <path d="M9 23 16 9l7 14h-3.2l-3.8-8-3.8 8z" fill="#eaf1fc" />
       </svg>
-      <span>{tr('site.name')}</span>
-    </a>
+        <span>{tr('site.name')}</span>
+      </a>
+
+      {/* Utanför <a>, inte inuti. Låg den i länken skulle dess tillgängliga
+          namn bli "Appfinningar Beta" — en skärmläsare hade läst upp stadiet
+          som en del av destinationen varje gång. */}
+      <span class="tag stage">{tr('site.stage')}</span>
+    </div>
 
     <nav aria-label={tr('site.name')}>
       {nav.map(({ key, label }) => (
         <a href={routes[key][lang]} aria-current={key === current ? 'page' : undefined}>{label}</a>
       ))}
+
     <!-- Skickar till samma sida på andra språket, inte till förstasidan. -->
       <a class="lang" href={routes[current][other]} lang={other} hreflang={other} title={tr('nav.language')}>
         {other === 'en' ? 'EN' : 'SV'}
@@ -95,6 +103,8 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
       transparent 100%
     );
   }
+  .brand-group { display: flex; align-items: center; gap: .55rem; }
+
   .brand {
     --mark-size: 2.2rem;
     display: inline-flex; align-items: center; gap: .6rem;
@@ -111,6 +121,14 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
     transform: translateY(-1px);
     box-shadow: 0 4px 14px -2px rgba(61, 139, 253, .75);
   }
+  /* Samma piller som projektkortens Beta/Demo, en aning mindre här. */
+  .stage {
+    margin-left: 0;
+    font-size: .64rem;
+    padding: .1rem .5rem;
+    vertical-align: 0;
+  }
+
   nav { display: flex; align-items: baseline; gap: 1.4rem; }
   nav a {
     font-size: .95rem; color: var(--muted); text-decoration: none;
