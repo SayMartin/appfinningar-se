@@ -17,6 +17,7 @@ export const projects: Project[] = [
   {
     id: 'cv-forge',
     name: 'CV Forge',
+    tag: { sv: 'Beta', en: 'Beta' },
     url: 'https://cv-forge.appfinningar.se/',
     host: 'cv-forge.appfinningar.se',
     // repo: 'https://github.com/SayMartin/cv-forge',
@@ -32,7 +33,7 @@ export const projects: Project[] = [
   {
     id: 'wordlune',
     name: 'Wordlune',
-    // tag: { sv: 'Beta', en: 'Beta' },
+    tag: { sv: 'Beta', en: 'Beta' },
     url: 'https://wordlune.appfinningar.se/',
     host: 'wordlune.appfinningar.se',
     // repo: 'https://github.com/SayMartin/Wordlune',
