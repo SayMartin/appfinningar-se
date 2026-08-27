@@ -5,8 +5,8 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tr = t(lang);
 
-// Prosa som bara finns på den här sidan hålls här i stället för i ui.ts —
-// ui.ts är till för korta återkommande etiketter, inte hela stycken.
+// Prose that only exists on this page is kept here rather than in ui.ts —
+// ui.ts is for short recurring labels, not whole paragraphs.
 const copy = {
   sv: {
     intro:
@@ -47,11 +47,11 @@ const copy = {
   <p class="lede">{copy.intro}</p>
 
   <h2 class="section-heading">{copy.workHeading}</h2>
-  <!-- TODO Martin: ersätt rutan nedan med din egen text och ta bort .todo-blocket. -->
+  {/* TODO Martin: replace the box below with your own text and drop the .todo block. */}
   <p class="todo"><strong>Att fylla i.</strong> {copy.todoWork}</p>
 
   <h2 class="section-heading">{copy.backgroundHeading}</h2>
-  <!-- TODO Martin: ersätt rutan nedan med din egen text och ta bort .todo-blocket. -->
+  {/* TODO Martin: replace the box below with your own text and drop the .todo block. */}
   <p class="todo"><strong>Att fylla i.</strong> {copy.todoBackground}</p>
   <p class="todo"><strong>Valfritt.</strong> {copy.todoCv}</p>
 

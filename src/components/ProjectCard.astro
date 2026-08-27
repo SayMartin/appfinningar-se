@@ -32,8 +32,8 @@ const tr = t(lang);
     border-color: var(--border-hov);
     transform: translateY(-3px);
   }
-  /* Svag glöd som tänds under kortet vid hovring. Ligger bakom (z-index: -1)
-     så den aldrig lägger sig över texten. */
+  /* Faint glow that lights up under the card on hover. Sits behind it
+     (z-index: -1) so it can never cover the text. */
   .card::after {
     content: ''; position: absolute; inset: -1px; border-radius: inherit;
     z-index: -1; opacity: 0; transition: opacity .25s ease;

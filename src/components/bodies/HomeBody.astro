@@ -1,6 +1,6 @@
 ---
 import ProjectCard from '../ProjectCard.astro';
-import PhotoGrid from '../PhotoGrid.astro';
+// import PhotoGrid from '../PhotoGrid.astro';  // photo section is off on the home page
 import { t, routes, type Lang } from '../../i18n/ui';
 import { projects } from '../../data/projects';
 
@@ -25,10 +25,16 @@ const tr = t(lang);
   {projects.map((project) => <ProjectCard project={project} lang={lang} />)}
 </div>
 
+{/* The photo section is not shown on the home page right now. The photo pages
+    still exist and work — uncomment the block below and the import at the top
+    to bring it back. This is a {}-style comment on purpose: a plain HTML
+    comment would ship out in the delivered page.
+
 <h2 class="section-heading">{tr('photos.heading')}</h2>
 <p class="lede measure center photo-lede">{tr('photos.lede')}</p>
 <PhotoGrid lang={lang} limit={6} />
 <p class="more center"><a href={routes.photos[lang]}>{tr('photos.seeAll')} &rarr;</a></p>
+*/}
 
 <h2 class="section-heading">{tr('about.heading')}</h2>
 <p class="lede measure center">{tr('contact.lede')}</p>

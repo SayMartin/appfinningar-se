@@ -4,9 +4,10 @@ export type Lang = keyof typeof languages;
 export const defaultLang: Lang = "sv";
 
 /**
- * Sidkarta per språk. Nyckeln är sidans identitet, värdet är dess URL i det
- * språket — så språkväxlaren kan skicka besökaren till *samma* sida på andra
- * språket i stället för att alltid kasta tillbaka till förstasidan.
+ * Site map per language. The key is the page's identity, the value is its URL
+ * in that language — so the language switcher can send a visitor to the *same*
+ * page in the other language instead of always throwing them back to the home
+ * page.
  */
 export const routes = {
   home: { sv: "/", en: "/en/" },
@@ -74,7 +75,7 @@ export const ui = {
 
     "home.title": "Appfinningar — apps and web services by Martin",
     "home.description":
-      "Martin's portfolio: CV Forge for building and exporting CVs, the word game Wordlune, and a publishing system for folk high schools. Plus photography.",
+      "Martin's portfolio: CV Forge for building and exporting CVs, the word game Wordlune, and a publishing system for folk high schools.",
     "home.h1": "Small apps, built in my spare time.",
     "home.lede":
       "I'm Martin, and I like to code. Web services and mobile apps turn into hobby projects that I finish rather than leave as ideas — preferably in a new tech stack each time, since that is how I learn the most. Here's what's running right now.",

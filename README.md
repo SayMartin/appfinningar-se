@@ -1,74 +1,79 @@
 # appfinningar.se
 
-Portfolio och projektsajt för Martin. Statisk sajt byggd med [Astro](https://astro.build),
-driftad på Cloudflare Pages, på svenska och engelska.
+Portfolio and project site for Martin. Static site built with
+[Astro](https://astro.build), hosted on Cloudflare Pages, in Swedish and
+English.
 
-## Kom igång
+## Getting started
 
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # skriver till dist/
-npm run preview  # visar dist/ som den kommer se ut i drift
+npm run build    # writes to dist/
+npm run preview  # serves dist/ as it will look in production
 ```
 
-Kräver Node 22.12 eller senare.
+Requires Node 22.12 or later.
 
-## Struktur
+## Structure
 
-| Sökväg | Innehåll |
+| Path | Contents |
 |---|---|
-| `src/pages/` | En fil per sida. Svenska i roten, engelska under `en/`. |
-| `src/components/bodies/` | Sidinnehållet, delat mellan språken — en komponent per sida, inte per språk. |
-| `src/i18n/ui.ts` | Alla korta texter och etiketter, båda språken. Även sidkartan `routes`. |
-| `src/data/projects.ts` | Projektkorten. Lägg till ett projekt här och det dyker upp på båda språken. |
-| `src/data/photos.ts` | Alt-texter till bilderna. |
-| `src/assets/photos/` | Bildfilerna. Se README:n i mappen. |
-| `public/` | Filer som kopieras rakt igenom orörda: favicon, robots.txt, ett eventuellt CV. |
+| `src/pages/` | One file per page. Swedish at the root, English under `en/`. |
+| `src/components/bodies/` | The page content, shared between languages — one component per page, not per language. |
+| `src/i18n/ui.ts` | All short strings and labels, both languages. Also the site map, `routes`. |
+| `src/data/projects.ts` | The project cards. Add a project here and it shows up in both languages. |
+| `src/data/photos.ts` | Alt text for the images. |
+| `src/assets/photos/` | The image files. See the README in that folder. |
+| `public/` | Files copied through untouched: favicon, robots.txt, a CV if there is one. |
 
-## Vanliga ändringar
+## Common changes
 
-**Lägg till ett projekt** — ett objekt i `src/data/projects.ts`. Utelämna `repo`
-om koden inte är publik, så visas ingen källkodslänk. Utelämna `tag` om projektet
-är i skarp drift.
+**Add a project** — one object in `src/data/projects.ts`. Omit `repo` when the
+code is not public and no source link is rendered. Omit `tag` once the project
+is in real use.
 
-**Lägg till bilder** — släpp filerna i `src/assets/photos/` i full upplösning och
-skriv alt-text i `src/data/photos.ts`. Bygget varnar för bilder som saknar alt-text.
+**Add images** — drop the files into `src/assets/photos/` at full resolution and
+write alt text in `src/data/photos.ts`. The build warns about images with no alt
+text.
 
-**Lägg till en sida** — skapa filen i både `src/pages/` och `src/pages/en/`, och
-lägg till den i `routes` i `src/i18n/ui.ts`. Då hittar språkväxlaren rätt
-motsvarighet i stället för att kasta besökaren till förstasidan.
+**Add a page** — create the file in both `src/pages/` and `src/pages/en/`, and
+add it to `routes` in `src/i18n/ui.ts`. That is how the language switcher finds
+the right counterpart instead of throwing the visitor back to the home page.
 
-**Ändra en text** — nästan allt kort ligger i `src/i18n/ui.ts`. Längre prosa ligger
-i respektive `bodies/`-komponent.
+**Change a string** — nearly everything short lives in `src/i18n/ui.ts`. Longer
+prose lives in the relevant `bodies/` component.
 
-## Språk
+## Languages
 
-Svenska ligger i roten (`/`, `/om/`, `/foto/`), engelska under `/en/`. Sidorna
-länkar till varandra med `hreflang`, så Google förstår att de är översättningar
-och inte dubblettinnehåll. `x-default` pekar på svenska.
+Swedish lives at the root (`/`, `/om/`, `/foto/`), English under `/en/`. The
+pages link to each other with `hreflang`, so Google understands they are
+translations rather than duplicate content. `x-default` points at Swedish.
+
+Code — comments, identifiers, commit messages — is English only. Swedish is the
+site's copy, not the source around it.
 
 ## Deploy
 
-Push till `main` bygger och laddar upp automatiskt via GitHub Actions.
+A push to `main` builds and uploads automatically via GitHub Actions.
 
-Två secrets måste finnas i repot (Settings → Secrets and variables → Actions):
+Two secrets must exist in the repo (Settings → Secrets and variables → Actions):
 
-| Namn | Värde |
+| Name | Value |
 |---|---|
-| `CLOUDFLARE_API_TOKEN` | Cloudflare-token med behörigheten Account · Cloudflare Pages · Edit |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare token with the permission Account · Cloudflare Pages · Edit |
 | `CLOUDFLARE_ACCOUNT_ID` | `CLOUDFLARE_ACCOUNT_ID` |
 
-Saknas de misslyckas jobbet med `it's necessary to set a CLOUDFLARE_API_TOKEN
-environment variable`. Loggens `with:`-block visar då bara `command:` — det är
-sättet att se att en secret saknas snarare än är felaktig.
+Without them the job fails with `it's necessary to set a CLOUDFLARE_API_TOKEN
+environment variable`. The log's `with:` block then shows only `command:` —
+that is how you tell a secret is missing rather than wrong.
 
-### Det som är värt att kontrollera efter första deployen
+### Worth checking after the first deploy
 
-Uppladdningen sker med `--branch=main`. Heter Pages-projektets produktionsgren
-något annat blir resultatet en **preview-deployment**: Actions lyser grönt,
-wrangler rapporterar lyckat, och appfinningar.se fortsätter servera den gamla
-versionen. Det är det mest förvirrande sättet det här kan misslyckas på.
+The upload runs with `--branch=main`. If the Pages project's production branch
+is called something else, the result is a **preview deployment**: Actions goes
+green, wrangler reports success, and appfinningar.se carries on serving the old
+version. It is the most confusing way this can fail.
 
-Kontrollera i Cloudflare → Pages → appfinningar → Deployments att den nya raden
-är märkt **Production**, inte Preview.
+Check in Cloudflare → Pages → appfinningar → Deployments that the new row is
+marked **Production**, not Preview.

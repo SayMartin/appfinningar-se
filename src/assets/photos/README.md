@@ -1,14 +1,16 @@
-# Foton
+# Photos
 
-Lägg bildfilerna här (`.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`). De plockas upp
-automatiskt vid nästa bygge — ingen lista att uppdatera någon annanstans.
+Put the image files here (`.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`). They are
+picked up automatically at the next build — no list to update anywhere else.
 
-**Lägg in originalen i full upplösning.** Astro skalar ner dem till 400, 800 och
-1200 px breda webp-varianter vid bygget och låter webbläsaren välja rätt storlek.
-Krymper du dem i förväg får du bara sämre bilder på stora skärmar.
+**Add the originals at full resolution.** Astro scales them down to 400, 800 and
+1200 px wide webp variants at build time and lets the browser pick the right
+size. Shrinking them beforehand only gets you worse images on large screens.
 
-Filnamnet styr ordningen (sorteras alfabetiskt) och blir nödlösning för alt-text
-om ingen är angiven. `2026-06-vattern-gryning.jpg` är alltså bättre än `IMG_4821.jpg`.
+The filename decides the order (sorted alphabetically) and becomes the fallback
+alt text when none is given. So `2026-06-vattern-gryning.jpg` beats
+`IMG_4821.jpg`.
 
-Skriv alt-text för varje bild i `src/data/photos.ts`. Bygget varnar för de som
-saknas — utan alt-text är bilden osynlig för skärmläsare och för Google.
+Write alt text for every image in `src/data/photos.ts`. The build warns about
+the ones that are missing — without alt text the image is invisible to screen
+readers and to Google.

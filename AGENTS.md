@@ -1,97 +1,110 @@
 # AGENTS.md
 
-Instruktioner för AI-agenter som arbetar i det här repot — Claude Code, Cursor,
-Codex och andra. **Det här är den enda filen som ska redigeras.** `CLAUDE.md`
-hänvisar hit och innehåller inga egna regler.
+Instructions for AI agents working in this repo — Claude Code, Cursor, Codex and
+others. **This is the only file to edit.** `CLAUDE.md` points here and holds no
+rules of its own.
 
-## Regler som går före allt annat
+## Rules that come before everything else
 
-**Kör aldrig `git commit`, `git push` eller `git add`.** Martin gör alla commits
-och pushar själv. Gör ändringarna, lämna dem i arbetsträdet, och berätta vilka
-filer du rört. Föreslå gärna en commit-text i löpande text — men kör den inte.
-Läsande git-kommandon (`status`, `log`, `diff`) är fine.
+**Never run `git commit`, `git push` or `git add`.** Martin makes every commit
+and push himself. Make the changes, leave them in the working tree, and say
+which files you touched. Suggesting a commit message in prose is welcome — just
+do not run it. Read-only git commands (`status`, `log`, `diff`) are fine.
 
-Skälet är inte formellt: en push till `main` deployar direkt till appfinningar.se.
-Att committa åt honom tar både historiken och en publik driftsättning ur hans händer.
+The reason is not procedural: a push to `main` deploys straight to
+appfinningar.se. Committing on his behalf takes both the history and a public
+deployment out of his hands.
 
-**Hitta aldrig på uppgifter om Martin.** Sajten används för att söka jobb.
-Bakgrund, utbildning, tidigare arbeten, tekniker han behärskar — sådant fylls i
-av honom. Saknas ett faktum, lämna en `<p class="todo">`-ruta som syns i
-webbläsaren i stället för att gissa. Detsamma gäller projektbeskrivningar: en
-vag text är sämre än en synlig lucka, eftersom den ser färdig ut.
+**Never invent facts about Martin.** The site is used to look for work.
+Background, education, previous jobs, technologies he knows — he fills those in
+himself. When a fact is missing, leave a `<p class="todo">` box that is visible
+in the browser instead of guessing. The same goes for project descriptions: a
+vague text is worse than a visible gap, because it looks finished.
 
-## Kommandon
+**Write code in English.** Comments, identifiers and commit messages are English
+only. Swedish belongs to the site's copy — the strings in `ui.ts` and the
+`bodies/` components — not to the source around it.
+
+## Commands
 
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # skriver till dist/
-npm run preview  # visar dist/ som den kommer se ut i drift
-npm run check    # astro check — typkontroll av .astro och .ts
+npm run build    # writes to dist/
+npm run preview  # serves dist/ as it will look in production
+npm run check    # astro check — type checking for .astro and .ts
 ```
 
-Kräver Node 22.12+. Det finns inga tester; `npm run check` är närmaste
-motsvarighet och ska gå rent innan något lämnas ifrån sig.
+Requires Node 22.12+. There are no tests; `npm run check` is the nearest
+equivalent and must pass before anything is handed over.
 
-## Arkitektur
+## Architecture
 
-Statisk Astro-sajt, tvåspråkig, **noll JavaScript i utdatan**. Det sista är ett
-medvetet val — kontrollera att det håller (`grep -r '<script' dist`) om du lägger
-till något som kan dra in klientkod.
+Static Astro site, bilingual, **zero JavaScript in the output**. That last part
+is a deliberate choice — verify it still holds (`grep -r '<script' dist`) if you
+add anything that could pull in client code.
 
-**Språkuppdelningen är den enda strukturen som inte är uppenbar av filträdet.**
-Svenska ligger i roten, engelska under `/en/` (`prefixDefaultLocale: false`).
-Tre saker hänger ihop och måste hållas i synk:
+**The language split is the one piece of structure the file tree does not give
+away.** Swedish lives at the root, English under `/en/`
+(`prefixDefaultLocale: false`). Three things hang together and must stay in
+sync:
 
-1. `src/pages/` och `src/pages/en/` — en tunn fil per sida och språk, som bara
-   väljer `lang` och skickar vidare.
-2. `src/components/bodies/` — själva sidinnehållet, **en komponent per sida, inte
-   per språk**. Den tar `lang` som prop. Duplicera aldrig en body per språk.
-3. `routes` i `src/i18n/ui.ts` — sidkartan. Språkväxlaren slår upp *samma sida* på
-   andra språket här. Glömmer du lägga in en ny sida i `routes` går växlaren
-   sönder tyst: den skickar besökaren till förstasidan i stället för till
-   översättningen, utan att något fel visas.
+1. `src/pages/` and `src/pages/en/` — one thin file per page and language, which
+   only picks `lang` and passes it on.
+2. `src/components/bodies/` — the page content itself, **one component per page,
+   not per language**. It takes `lang` as a prop. Never duplicate a body per
+   language.
+3. `routes` in `src/i18n/ui.ts` — the site map. The language switcher looks up
+   *the same page* in the other language here. Forget to add a new page to
+   `routes` and the switcher breaks silently: it sends the visitor to the home
+   page instead of to the translation, with no error shown.
 
-`Base.astro` bygger `canonical` och `hreflang` ur `routes`, så en sida som saknas
-där blir också felmärkt för sökmotorer.
+`Base.astro` builds `canonical` and `hreflang` out of `routes`, so a page
+missing from there is also mislabelled for search engines.
 
-**Var texter bor:** korta etiketter i `src/i18n/ui.ts` (båda språken i samma
-objekt). Längre prosa i respektive `bodies/`-komponent, i ett lokalt `copy`-objekt.
-Blanda inte — `ui.ts` ska gå att överblicka.
+**Where text lives:** short labels in `src/i18n/ui.ts` (both languages in the
+same object). Longer prose in the relevant `bodies/` component, in a local
+`copy` object. Do not mix the two — `ui.ts` has to stay readable at a glance.
 
-**Innehåll som data:** `src/data/projects.ts` (projektkort — utelämna `repo` om
-koden inte är publik, `tag` om projektet är i skarp drift) och `src/data/photos.ts`
-(alt-texter per filnamn).
+**Content as data:** `src/data/projects.ts` (project cards — omit `repo` when
+the code is not public, `tag` once the project is in real use) and
+`src/data/photos.ts` (alt text per filename).
 
-**Bilder:** `src/assets/photos/` läses med `import.meta.glob` i `PhotoGrid.astro` —
-lägg till en fil och den finns på sajten nästa bygge, ingen lista att uppdatera.
-Originalen ska ligga i full upplösning; Astro genererar 400/800/1200 px webp vid
-bygget. Bygget varnar för bilder utan alt-text. Bilder i `public/` optimeras
-**inte** — lägg foton i `src/assets/`, inte där.
+**Images:** `src/assets/photos/` is read with `import.meta.glob` in
+`PhotoGrid.astro` — add a file and it is on the site at the next build, no list
+to update. Originals should be full resolution; Astro generates 400/800/1200 px
+webp at build time. The build warns about images with no alt text. Images in
+`public/` are **not** optimised — put photos in `src/assets/`, not there.
+
+**Comments in templates:** use `{/* … */}`, not `<!-- … -->`. Astro passes HTML
+comments straight through to the delivered page, so notes meant for developers
+end up readable in the page source on the live site.
 
 ## Deploy
 
-Push till `main` → GitHub Actions → `npm ci && npm run build` → `wrangler pages
-deploy dist`. Kräver secrets `CLOUDFLARE_API_TOKEN` och `CLOUDFLARE_ACCOUNT_ID`.
+Push to `main` → GitHub Actions → `npm ci && npm run build` → `wrangler pages
+deploy dist`. Requires the secrets `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID`.
 
-Två fällor som redan kostat tid:
+Two traps that have already cost time:
 
-**Production kontra Preview.** Uppladdningen sker med `--branch=main`. Stämmer
-det inte med Pages-projektets produktionsgren blir det en preview-deployment:
-Actions lyser grönt, wrangler säger "Deployment complete", och appfinningar.se
-serverar fortfarande den gamla versionen. Deploy-loggen kan alltså inte användas
-som bevis. Verifiera mot den riktiga domänen:
+**Production versus Preview.** The upload runs with `--branch=main`. If that
+does not match the Pages project's production branch, the result is a preview
+deployment: Actions goes green, wrangler says "Deployment complete", and
+appfinningar.se still serves the old version. The deploy log therefore cannot be
+used as proof. Verify against the real domain:
 
 ```bash
 curl -sS https://appfinningar.se/ | grep -o '<title>[^<]*</title>'
 ```
 
-**API Token, inte Global API Key.** De ligger på samma sida i Cloudflare och bara
-den ena fungerar med wrangler. En Global API Key ger `Authentication error [code:
-10000]`, vilket ser ut som ett behörighetsfel men betyder att värdet är fel sorts
-hemlighet. Token behöver `Account · Cloudflare Pages · Edit` **och** kontot valt
-under Account Resources — tom Account Resources ger samma felkod.
+**API Token, not Global API Key.** They sit on the same page in Cloudflare and
+only one of them works with wrangler. A Global API Key gives `Authentication
+error [code: 10000]`, which looks like a permissions problem but means the value
+is the wrong kind of secret. The token needs `Account · Cloudflare Pages · Edit`
+**and** the account selected under Account Resources — an empty Account
+Resources produces the same error code.
 
-Felkod 10000 används för allt autentiseringsrelaterat och säger inget om orsaken.
-Testa token mot `/user/tokens/verify` innan den läggs i en secret, i stället för
-att pusha och vänta.
+Error code 10000 covers everything authentication-related and says nothing about
+the cause. Test the token against `/user/tokens/verify` before putting it in a
+secret, rather than pushing and waiting.

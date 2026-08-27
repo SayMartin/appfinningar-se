@@ -1,9 +1,10 @@
 # CLAUDE.md
 
-Reglerna för det här repot ligger i [AGENTS.md](AGENTS.md) — samma fil som Cursor,
-Codex och övriga agenter läser. Den här filen har inget eget innehåll och ska inte
-redigeras; ändringar görs i AGENTS.md.
+The rules for this repo live in [AGENTS.md](AGENTS.md) — the same file Cursor,
+Codex and the other agents read. This file has no content of its own and should
+not be edited; make changes in AGENTS.md.
 
 @AGENTS.md
 
-Läs AGENTS.md innan du gör något i repot, om den inte redan lästs in ovan.
+Read AGENTS.md before doing anything in this repo, unless it was already pulled
+in above.

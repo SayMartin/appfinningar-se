@@ -3,12 +3,12 @@ import type { Lang } from '../i18n/ui';
 export interface Project {
   id: string;
   name: string;
-  /** Kort etikett bredvid namnet, t.ex. Beta eller Demo. Utelämnas om projektet är i skarp drift. */
+  /** Short label next to the name, e.g. Beta or Demo. Omitted once a project is in real use. */
   tag?: Record<Lang, string>;
   url: string;
-  /** Värdnamnet som visas i kortet — utan protokoll, så det läses som en adress och inte som en länk. */
+  /** Host name shown on the card — no protocol, so it reads as an address rather than a link. */
   host: string;
-  /** Publikt repo. Utelämnas om koden inte är öppen — då visas ingen källkodslänk. */
+  /** Public repo. Omitted when the code is not open — the card then shows no source link. */
   repo?: string;
   description: Record<Lang, string>;
 }
@@ -27,9 +27,9 @@ export const projects: Project[] = [
     },
   },
 
-  // TODO Martin: skriv om beskrivningen nedan till vad Wordlune faktiskt är.
-  // Jag vet bara namnet, så texten är medvetet vag — och en vag beskrivning är
-  // precis det som gör en sökträff värdelös. Gäller båda språken.
+  // TODO Martin: rewrite the description below to say what Wordlune actually
+  // is. I only know the name, so the text is deliberately vague — and a vague
+  // description is exactly what makes a search hit worthless. Both languages.
   {
     id: 'wordlune',
     name: 'Wordlune',
@@ -43,9 +43,9 @@ export const projects: Project[] = [
     },
   },
 
-  // TODO Martin: lägg till repo-URL här om koden ligger publikt. Utan `repo`
-  // visas kortet helt enkelt utan källkodslänk, vilket är rätt beteende om
-  // repot är privat.
+  // TODO Martin: add the repo URL here if the code is public. Without `repo`
+  // the card simply renders without a source link, which is the right
+  // behaviour when the repo is private.
   {
     id: 'school-cms',
     name: 'School CMS',

@@ -6,14 +6,14 @@ import { captions, fallbackAlt } from '../data/photos';
 
 interface Props {
   lang: Lang;
-  /** Visa bara de N första — används för urvalet på förstasidan. */
+  /** Show only the first N — used for the selection on the home page. */
   limit?: number;
 }
 const { lang, limit } = Astro.props;
 const tr = t(lang);
 
-// Bilderna plockas upp automatiskt ur mappen. Martin lägger in en fil och den
-// finns på sajten nästa bygge — ingen lista att komma ihåg att uppdatera.
+// The images are picked up from the folder automatically. Drop a file in and
+// it is on the site at the next build — no list to remember to update.
 const modules = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/photos/*.{jpg,jpeg,png,webp,avif}',
   { eager: true },
@@ -28,7 +28,7 @@ const all = Object.entries(modules)
 
 for (const photo of all) {
   if (!captions[photo.filename]) {
-    console.warn(`[foto] ${photo.filename} saknar alt-text — lägg till den i src/data/photos.ts`);
+    console.warn(`[photos] ${photo.filename} has no alt text — add it in src/data/photos.ts`);
   }
 }
 
@@ -41,8 +41,8 @@ const photos = limit ? all.slice(0, limit) : all;
   <ul class="grid">
     {photos.map(({ image, alt }) => (
       <li>
-        {/* widths + sizes gör att mobilen laddar en 400px-variant i stället för
-            originalet. Astro genererar varianterna vid bygget. */}
+        {/* widths + sizes make phones load a 400px variant instead of the
+            original. Astro generates the variants at build time. */}
         <Image
           src={image}
           alt={alt}

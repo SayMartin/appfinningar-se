@@ -1,6 +1,6 @@
-/* Sajten är mörk, punkt. Halvtransparenta kort bygger på att det finns något
-   mörkt bakom glaset — i ljust läge blir samma kort bara gråa. Ett läge som
-   görs bra slår två som görs halvbra. */
+/* The site is dark, full stop. Semi-transparent cards depend on there being
+   something dark behind the glass — in a light theme the same cards just turn
+   grey. One theme done well beats two done half well. */
 
 :root {
   color-scheme: dark;
@@ -9,9 +9,9 @@
   --bg-mid: #1b1442;
   --bg-deep: #070c1c;
 
-  /* Kortytorna är vitt med låg opacitet, inte en egen färg. Då plockar de upp
-     bakgrundens toner och glöden bakom syns igenom, i stället för att ligga som
-     grå plattor ovanpå. */
+  /* Card surfaces are white at low opacity, not a colour of their own. That
+     way they pick up the background's tones and let the glow behind show
+     through, instead of sitting on top as grey slabs. */
   --surface: rgba(255, 255, 255, .042);
   --surface-hov: rgba(255, 255, 255, .068);
   --border: rgba(255, 255, 255, .09);
@@ -26,8 +26,8 @@
   --radius: 14px;
   --blur: 14px;
 
-  /* Sidans mått på ett ställe. Sidhuvudet läser samma variabler, så dess
-     innehåll står alltid i linje med sidans — de kan inte glida isär. */
+  /* The page's measurements in one place. The header reads the same variables,
+     so its content always lines up with the page's — they cannot drift apart. */
   --wrap-max: 72rem;
   --wrap-pad: 1.5rem;
 }
@@ -43,9 +43,9 @@ body {
   font: 16px/1.65 system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 
-  /* Två mjuka ljuskällor uppe till vänster och höger, plus en botten som mörknar.
-     background-attachment: fixed gör att de ligger still när sidan rullar — kortens
-     genomskinlighet får då något som förändras att röra sig mot. */
+  /* Two soft light sources top left and top right, plus a darkening bottom.
+     background-attachment: fixed holds them still as the page scrolls — the
+     cards' transparency then has something changing to move against. */
   background:
     radial-gradient(60rem 42rem at 10% -10%, rgba(61, 139, 253, .20), transparent 62%),
     radial-gradient(48rem 36rem at 94% 6%, rgba(139, 108, 255, .17), transparent 60%),
@@ -55,9 +55,9 @@ body {
   background-color: var(--bg-deep);
 }
 
-/* Fin kornighet över hela sidan. Stora mjuka gradienter blir annars randiga på
-   8-bitars skärmar — bruset bryter upp banden. Ligger bakom allt innehåll och
-   fångar inga klick. */
+/* Fine grain across the whole page. Large soft gradients otherwise band on
+   8-bit displays — the noise breaks the bands up. Sits behind all content and
+   catches no clicks. */
 body::before {
   content: '';
   position: fixed;
@@ -89,7 +89,7 @@ a:hover { color: var(--accent-hov); }
 h1 {
   font-size: clamp(2rem, 5.5vw, 2.9rem);
   line-height: 1.12; margin: 0 0 1rem; letter-spacing: -.025em;
-  /* Toppen av rubriken nästan vit, botten dovare — ger djup utan att bli effektsökeri. */
+  /* Top of the heading near-white, bottom duller — depth without showing off. */
   background: linear-gradient(175deg, #ffffff 8%, #b9caea 92%);
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
@@ -104,8 +104,8 @@ h1 {
   margin: 4.5rem 0 2rem; padding-bottom: 1rem;
   position: relative;
 }
-/* Kort streck under rubriken, med en ljusare prick i mitten — samma grepp som
-   båda referenserna använder för att markera avsnittsstart. */
+/* Short rule under the heading, brighter in the middle — the same device both
+   references use to mark the start of a section. */
 .section-heading::after {
   content: ''; position: absolute; left: 50%; bottom: 0;
   transform: translateX(-50%);
@@ -113,16 +113,16 @@ h1 {
   background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
 }
 
-/* Gemensam glasyta. Kort, rutor och paneler använder den här — ändra på ett
-   ställe och hela sajten följer med. */
+/* Shared glass surface. Cards, boxes and panels all use it — change it in one
+   place and the whole site follows. */
 .glass {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   -webkit-backdrop-filter: blur(var(--blur)) saturate(140%);
   backdrop-filter: blur(var(--blur)) saturate(140%);
-  /* Ljus hårfin linje längs överkanten — det är den som får ytan att läsa som
-     glas i stället för som en genomskinlig ruta. */
+  /* Bright hairline along the top edge — that is what makes the surface read
+     as glass rather than as a transparent rectangle. */
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .07),
     0 1px 2px rgba(0, 0, 0, .3),
@@ -156,7 +156,7 @@ h1 {
 .prose ul { color: var(--muted); max-width: 36rem; padding-left: 1.2rem; }
 .prose li { margin-bottom: .4rem; }
 
-/* Ifyllnadsmarkör för texter Martin ska skriva själv. */
+/* Fill-in marker for copy Martin is going to write himself. */
 .todo {
   border-left: 3px solid #d8b23c;
   background: rgba(216, 178, 60, .075);
@@ -166,13 +166,13 @@ h1 {
 }
 .todo strong { color: #e8cd77; }
 
-/* Rörelse är utsmyckning här — den som stängt av den ska slippa. */
+/* Motion is decoration here — anyone who has turned it off should be spared. */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
 
-/* Knappar. Fylld för det viktigaste, konturerad för alternativet — ett par,
-   aldrig två fyllda bredvid varandra. */
+/* Buttons. Filled for the primary action, outlined for the alternative — a
+   pair, never two filled ones side by side. */
 .btn {
   display: inline-flex; align-items: center; gap: .5rem;
   padding: .7rem 1.4rem; border-radius: 999px;
@@ -198,13 +198,13 @@ h1 {
 
 .btn-row { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.8rem 0 0; }
 
-/* Rutnätet räknar ut antalet spalter själv: tre på stor skärm, två på
-   mellanstor, en på mobil. Inga brytpunkter att hålla reda på. */
+/* The grid works out its own column count: three on a large screen, two on a
+   medium one, one on a phone. No breakpoints to keep track of. */
 .card-grid {
   display: grid; gap: 1.2rem;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
 }
 
-/* Läsbredd hålls kort även när sidan är bred — mätetalet ska vara text, inte fönster. */
+/* Line length stays short even on a wide page — the measure is the text, not the window. */
 .measure { max-width: 38rem; }
 .center { text-align: center; margin-left: auto; margin-right: auto; }

@@ -28,8 +28,8 @@ const enUrl = new URL(routes[current].en, Astro.site);
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
 
-  <!-- Berättar för Google att sidorna är översättningar av varandra och inte
-       dubblettinnehåll. x-default pekar på svenska, som är rot-URL:en. -->
+  {/* Tells Google these pages are translations of each other, not duplicate
+      content. x-default points at Swedish, which is the root URL. */}
   <link rel="alternate" hreflang="sv" href={svUrl} />
   <link rel="alternate" hreflang="en" href={enUrl} />
   <link rel="alternate" hreflang="x-default" href={svUrl} />

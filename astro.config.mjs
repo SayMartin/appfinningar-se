@@ -5,9 +5,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://appfinningar.se',
 
-  // Svenska ligger i roten, engelska under /en/. prefixDefaultLocale: false
-  // gör att appfinningar.se/ förblir den svenska förstasidan — inga redirects,
-  // inga /sv/-URL:er som konkurrerar med den i sökresultaten.
+  // Swedish lives at the root, English under /en/. prefixDefaultLocale: false
+  // keeps appfinningar.se/ as the Swedish home page — no redirects, and no
+  // /sv/ URLs competing with it in search results.
   i18n: {
     defaultLocale: 'sv',
     locales: ['sv', 'en'],
@@ -17,6 +17,11 @@ export default defineConfig({
   integrations: [
     sitemap({
       i18n: { defaultLocale: 'sv', locales: { sv: 'sv-SE', en: 'en' } },
+
+      // The photo pages still build, but nothing links to them any more, so
+      // they stay out of the sitemap. Put the photo section back on the home
+      // page and this filter goes with it.
+      filter: (page) => !/\/(foto|en\/photos)\/$/.test(page),
     }),
   ],
 });

@@ -5,9 +5,10 @@ interface Props { lang: Lang; current: RouteKey }
 const { lang, current } = Astro.props;
 const tr = t(lang);
 
-// Etiketten slås upp tolerant: kommenteras en nyckel bort i ui.ts försvinner
-// posten ur menyn i stället för att bli en länk utan text. En namnlös länk är
-// osynlig på skärmen men fångas ändå av tangentbord och skärmläsare.
+// The label lookup is deliberately forgiving: comment a key out in ui.ts and
+// the entry drops out of the menu instead of becoming a link with no text. A
+// nameless link is invisible on screen yet still reachable by keyboard and
+// screen reader.
 const label = (key: string): string | undefined =>
   (ui[lang] as Record<string, string>)[key] ?? (ui[defaultLang] as Record<string, string>)[key];
 
@@ -22,9 +23,10 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
   <div class="header-inner">
     <div class="brand-group">
       <a class="brand" href={routes.home[lang]}>
-        {/* Samma märke som favicon, inlagt i HTML:en i stället för som <img> —
-            slipper ett extra anrop och skalar utan att bli suddigt. Dekorativt:
-            länkens text är ordet bredvid, så den döljs för skärmläsare. */}
+        {/* The same mark as the favicon, inlined in the HTML rather than an
+            <img> — saves a request and scales without going blurry. Purely
+            decorative: the link's text is the word beside it, so the mark is
+            hidden from screen readers. */}
         <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="brandMark" x1="0" y1="0" x2="1" y2="1">
@@ -38,9 +40,9 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
         <span>{tr('site.name')}</span>
       </a>
 
-      {/* Utanför <a>, inte inuti. Låg den i länken skulle dess tillgängliga
-          namn bli "Appfinningar Beta" — en skärmläsare hade läst upp stadiet
-          som en del av destinationen varje gång. */}
+      {/* Outside the <a>, not inside it. Within the link, its accessible name
+          would become "Appfinningar Beta" — a screen reader would read the
+          stage out as part of the destination every single time. */}
       <span class="tag stage">{tr('site.stage')}</span>
     </div>
 
@@ -49,7 +51,7 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
         <a href={routes[key][lang]} aria-current={key === current ? 'page' : undefined}>{label}</a>
       ))}
 
-    <!-- Skickar till samma sida på andra språket, inte till förstasidan. -->
+    {/* Goes to the same page in the other language, not to the home page. */}
       <a class="lang" href={routes[current][other]} lang={other} hreflang={other} title={tr('nav.language')}>
         {other === 'en' ? 'EN' : 'SV'}
       </a>
@@ -58,15 +60,15 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
 </header>
 
 <style>
-  /* Följer med vid rullning. Ligger utanför .wrap, så bakgrunden når hela
-     fönsterbredden i stället för att kapas vid innehållets kant. */
+  /* Follows the scroll. Sits outside .wrap so the background reaches the full
+     window width instead of being cut off at the content edge. */
   .site-header {
     position: sticky; top: 0; z-index: 5;
     margin-bottom: 2.5rem;
   }
 
-  /* Samma bredd och sidopadding som .wrap, via delade variabler. Loggan hamnar
-     då exakt över sidans vänsterkant och menyn över dess högerkant. */
+  /* Same width and side padding as .wrap, through shared variables. That puts
+     the logo exactly above the page's left edge and the menu above its right. */
   .header-inner {
     max-width: var(--wrap-max);
     margin: 0 auto;
@@ -75,8 +77,9 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
     justify-content: space-between; gap: 1rem;
   }
 
-  /* Bakgrunden som eget lager. Masken tonar ut både färgen OCH blurren nedåt —
-     utan den slutar oskärpan tvärt i en synlig kant mitt på sidan. */
+  /* The background as its own layer. The mask fades out both the colour AND
+     the blur downwards — without it the blur stops dead in a visible seam
+     across the middle of the page. */
   .site-header::before {
     content: ''; position: absolute; inset: 0; z-index: -1;
     background: linear-gradient(
@@ -91,8 +94,8 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
     mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
   }
 
-  /* Hårfin linje som tonar bort mot vänster och höger i stället för att sluta
-     tvärt — samma tanke som bakgrunden, fast i sidled. */
+  /* Hairline rule that fades out to the left and right instead of stopping
+     dead — the same idea as the background, turned sideways. */
   .site-header::after {
     content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
     background: linear-gradient(
@@ -121,7 +124,7 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
     transform: translateY(-1px);
     box-shadow: 0 4px 14px -2px rgba(61, 139, 253, .75);
   }
-  /* Samma piller som projektkortens Beta/Demo, en aning mindre här. */
+  /* The same pill as the Beta/Demo tags on the project cards, a touch smaller. */
   .stage {
     margin-left: 0;
     font-size: .64rem;

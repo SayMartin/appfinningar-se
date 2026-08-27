@@ -1,12 +1,13 @@
 import type { Lang } from '../i18n/ui';
 
 /**
- * Alt-texter per filnamn. Nyckeln är filnamnet exakt som det ligger i
+ * Alt text per filename. The key is the filename exactly as it appears in
  * src/assets/photos/.
  *
- * Alt-text är inte valfritt pynt: utan den är bilden helt osynlig för den som
- * använder skärmläsare, och osynlig för Google. Beskriv vad som syns, inte att
- * det är ett foto — "Dimma över Vättern i gryningen", inte "Bild 1".
+ * Alt text is not optional decoration: without it the image is entirely
+ * invisible to anyone using a screen reader, and invisible to Google. Describe
+ * what is in the picture, not that it is a photo — "Mist over Lake Vättern at
+ * dawn", not "Image 1".
  */
 export const captions: Record<string, Record<Lang, string>> = {
   // 'vattern-gryning.jpg': {
@@ -15,7 +16,7 @@ export const captions: Record<string, Record<Lang, string>> = {
   // },
 };
 
-/** Filnamn utan ändelse, som nödlösning när alt-text saknas. */
+/** Filename without its extension, as a last resort when alt text is missing. */
 export function fallbackAlt(filename: string): string {
   return filename
     .replace(/\.[^.]+$/, '')

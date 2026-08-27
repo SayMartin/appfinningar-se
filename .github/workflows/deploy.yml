@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# En push medan en deploy pågår ska ersätta den, inte tävla med den.
+# A push during a running deploy should replace it, not race it.
 concurrency:
   group: pages-deploy
   cancel-in-progress: true
@@ -23,17 +23,17 @@ jobs:
           node-version: 22
           cache: npm
 
-      # npm ci installerar exakt det som står i package-lock.json. Bygget på
-      # servern får alltså samma versioner som du testat lokalt.
+      # npm ci installs exactly what package-lock.json says, so the build on
+      # the server gets the same versions you tested locally.
       - run: npm ci
 
-      # Astro skriver färdig HTML till dist/, och optimerar bilderna på vägen.
+      # Astro writes finished HTML to dist/, optimising the images on the way.
       - run: npm run build
 
       - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Utan den här raden installerar actionen en gammal wrangler (3.90.0).
+          # Without this line the action installs an old wrangler (3.90.0).
           wranglerVersion: '4.125.0'
           command: pages deploy dist --project-name=appfinningar --branch=main
