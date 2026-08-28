@@ -17,12 +17,15 @@ const copy = {
     workHeading: 'Vad jag arbetar med',
     skills: [
       { label: 'Språk', items: 'TypeScript, C#, Kotlin, Java, Swift, Dart, SQL' },
+      { label: 'Mobil', items: 'Android och iOS nativt, Flutter, MVVM, Android Studio och Xcode' },
       { label: 'Frontend', items: 'React, Next.js, React Native/Expo, Tailwind' },
       { label: 'Backend', items: '.NET, Entity Framework, Postgres, Prisma, Drizzle, Supabase, Cloudflare D1' },
       { label: 'Drift', items: 'Docker, GitHub Actions, Cloudflare Workers/Pages/R2/Tunnel, nginx, egen Ubuntu-server' },
     ],
-    workSummary:
-      'Tyngdpunkten ligger i TypeScript och .NET, med flera år av mobilutveckling i produktion bakom mig — bland annat som en av två utvecklare på Android-sidan av TYRA Förskoleappen, som över 2 500 förskolor loggar in i. Det jag är mest van vid är att äga hela kedjan: mina egna projekt på förstasidan är designade, byggda och driftsatta av mig ensam, från datamodell till maskinen de står på.',
+    work: [
+      'Jag är utbildad mobilutvecklare och har arbetat som det. Yrkeshögskola i iOS- och Android-programmering i Malmö, sedan flera år i produktion: ett frilansuppdrag som ensam apputvecklare i Flutter, och därefter Bayou i Lund som en av två utvecklare på Android-sidan av TYRA Förskoleappen — en kodbas som över 2 500 förskolor loggar in i. Mobilen är alltså inte något jag provat vid sidan om, det är där jag kommer ifrån.',
+      'Sedan dess har jag breddat mig, och det är åt det hållet jag söker mig vidare: hela kedjan i stället för ett lager av den. Tyngdpunkten ligger numera i TypeScript och .NET, och mina egna projekt på förstasidan är designade, byggda och driftsatta av mig ensam — från datamodell till maskinen de står på. Mobilvanan följer med snarare än ersätts; Wordlune är en enda kodbas som blir iOS, Android och webb samtidigt.',
+    ],
     workPreference: 'Helst fullstack i TypeScript, gärna med mobilen i samma kodbas.',
     backgroundHeading: 'Bakgrund',
     background: [
@@ -42,8 +45,6 @@ const copy = {
     availability:
       'Jag utgår från Malmö och arbetar på plats, på distans eller hybrid. Finns rätt sammanhang någon annanstans flyttar jag gärna dit. Uppdrag fakturerar jag via eget bolag — frilans, korta som långa. Anställning är lika intressant.',
     onRequest: 'CV och referenser lämnar jag gärna på förfrågan.',
-    todoCv:
-      'Vill du ha ett nedladdningsbart CV: lägg PDF:en i public/ som cv-martin.pdf, så länkar jag in den härifrån. CV Forge kan ju exportera den åt dig.',
   },
   en: {
     intro:
@@ -52,12 +53,15 @@ const copy = {
     workHeading: 'What I work with',
     skills: [
       { label: 'Languages', items: 'TypeScript, C#, Kotlin, Java, Swift, Dart, SQL' },
+      { label: 'Mobile', items: 'Native Android and iOS, Flutter, MVVM, Android Studio and Xcode' },
       { label: 'Frontend', items: 'React, Next.js, React Native/Expo, Tailwind' },
       { label: 'Backend', items: '.NET, Entity Framework, Postgres, Prisma, Drizzle, Supabase, Cloudflare D1' },
       { label: 'Operations', items: 'Docker, GitHub Actions, Cloudflare Workers/Pages/R2/Tunnel, nginx, my own Ubuntu server' },
     ],
-    workSummary:
-      'The weight sits in TypeScript and .NET, on top of several years of shipping mobile software in production — among other things as one of two developers on the Android side of the TYRA preschool app, which more than 2,500 preschools log into. What I am most used to is owning the whole chain: my own projects on the front page were designed, built and deployed by me alone, from data model to the machine they run on.',
+    work: [
+      'I trained as a mobile developer and have worked as one. A vocational programme in iOS and Android development in Malmö, then several years in production: a freelance assignment as the sole app developer in Flutter, and after that Bayou in Lund as one of two developers on the Android side of the TYRA preschool app — a codebase more than 2,500 preschools log into. Mobile is not something I tried on the side; it is where I come from.',
+      'Since then I have widened out, and that is the direction I am looking to go further in: the whole chain rather than one layer of it. The weight now sits in TypeScript and .NET, and my own projects on the front page were designed, built and deployed by me alone — from data model to the machine they run on. The mobile habit comes along rather than being replaced; Wordlune is a single codebase that becomes iOS, Android and web at once.',
+    ],
     workPreference: 'Fullstack in TypeScript for preference, ideally with mobile in the same codebase.',
     backgroundHeading: 'Background',
     background: [
@@ -77,8 +81,6 @@ const copy = {
     availability:
       'I am based in Malmö and work on site, remotely or hybrid. If the right place is somewhere else, I will gladly move there. Assignments are invoiced through my own company — freelance, short or long. Employment is just as interesting.',
     onRequest: 'A CV and references are gladly provided on request.',
-    todoCv:
-      'Want a downloadable CV? Put the PDF in public/ as cv-martin.pdf and I will link it from here. CV Forge can export it for you.',
   },
 }[lang];
 ---
@@ -106,7 +108,7 @@ const copy = {
       <li><strong>{label}:</strong> {items}</li>
     ))}
   </ul>
-  <p>{copy.workSummary}</p>
+  {copy.work.map((paragraph) => <p>{paragraph}</p>)}
   <p class="preference">{copy.workPreference}</p>
 
   <h2 class="section-heading">{copy.backgroundHeading}</h2>
@@ -115,7 +117,6 @@ const copy = {
     {copy.placement.before}<a href="https://www.munkafolkhogskola.se/">{copy.placement.link}</a>{copy.placement.after}
   </p>
   <p>{copy.backgroundClosing}</p>
-  <p class="todo"><strong>Valfritt.</strong> {copy.todoCv}</p>
 
   <h2 class="section-heading">{copy.contactHeading}</h2>
   <p class="badge-row"><span class="badge">{tr('contact.available')}</span></p>

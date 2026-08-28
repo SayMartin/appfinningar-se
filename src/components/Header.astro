@@ -40,10 +40,13 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
         <span>{tr('site.name')}</span>
       </a>
 
-      {/* Outside the <a>, not inside it. Within the link, its accessible name
-          would become "Appfinningar Beta" — a screen reader would read the
-          stage out as part of the destination every single time. */}
+      {/* The stage label lives here when the site needs one. Keep it outside
+          the <a>, never inside: within the link its accessible name would
+          become "Appfinningar Under uppbyggnad", and a screen reader would read
+          the stage out as part of the destination every single time.
+
       <span class="tag stage">{tr('site.stage')}</span>
+      */}
     </div>
 
     <nav aria-label={tr('site.name')}>
