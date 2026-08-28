@@ -12,14 +12,32 @@ const copy = {
     intro:
       'Jag heter Martin och bygger webbtjänster och mobilappar. Appfinningar är domänen jag samlar dem under, inget företag. Det som ligger under Projekt är inte skisser eller kursuppgifter — det är saker som är i drift och går att klicka sig in i och prova.',
     workHeading: 'Vad jag arbetar med',
+    skills: [
+      { label: 'Språk', items: 'TypeScript, C#, Kotlin, Java, Swift, Dart, SQL' },
+      { label: 'Frontend', items: 'React, Next.js, React Native/Expo, Tailwind' },
+      { label: 'Backend', items: '.NET, Entity Framework, Postgres, Prisma, Drizzle, Supabase, Cloudflare D1' },
+      { label: 'Drift', items: 'Docker, GitHub Actions, Cloudflare Workers/Pages/R2/Tunnel, nginx, egen Ubuntu-server' },
+    ],
+    workSummary:
+      'Tyngdpunkten ligger i TypeScript och .NET, med flera år av mobilutveckling i produktion bakom mig — bland annat som en av två utvecklare på Android-sidan av TYRA Förskoleappen, som över 2 500 förskolor loggar in i. Det jag är mest van vid är att äga hela kedjan: mina egna projekt på förstasidan är designade, byggda och driftsatta av mig ensam, från datamodell till maskinen de står på.',
+    workPreference: 'Helst fullstack i TypeScript, gärna med mobilen i samma kodbas.',
     backgroundHeading: 'Bakgrund',
+    background: [
+      'Jag läste fysik i Lund men tog aldrig ut någon examen. Examensarbetet — experimentell molekylär elektronik på nanoavdelningen — blev aldrig presenterat: att forska och undervisa var roligare än att skriva klart, och när pengarna tog slut fick jag ta ett jobb. Det jobbet blev begravningsentreprenör, och där blev jag kvar i tretton år — de sista tre på byråns familjerättsavdelning som juristassistent inom familjerätt. Det är inte den bakgrund som brukar stå på en utvecklares sida, men det är två yrken där noggrannhet och möten med människor i utsatta lägen är själva arbetet.',
+      'Vägen in i utveckling gick via mobilen: yrkeshögskoleutbildning i iOS- och Android-programmering i Malmö, praktik på Cybercom med en röststyrd prototyp i Android, ett frilansuppdrag åt Head of Search som ensam apputvecklare i Flutter, och därefter knappt tre år på Bayou i Lund som en av två utvecklare på Android-sidan av TYRA Förskoleappen — en kodbas som började i Java och växte vidare i Kotlin.',
+      'Efter Bayou lade jag om kursen. Nyfikenhet och vetgirighet driver mig att utforska nya områden, och jag ville bredda mig från Android-specialisten till ett mer projektövergripande ansvar: från idé till färdig produkt, med kundnyttan i centrum och med någon som värnar om idén hela vägen dit. Hösten 2025 började jag därför en fullstackutbildning på Lexicon i Malmö för att lägga backend och webb till mobilen — C#, .NET, Entity Framework och SQL, React och TypeScript — och läste parallellt en distanskurs i agila metoder för utvecklare på Lexicon i Stockholm.',
+    ],
+    placement: {
+      before: 'Praktiken gjorde jag på ',
+      link: 'Munka Folkhögskola',
+      after:
+        ', där jag byggde skolans nya webbplats i Next.js och ersatte en äldre WordPress-lösning. Hela kodbasen är skriven av mig, och sajten är i drift. Det bygget blev också utgångspunkten för School CMS: det jag lärde mig av en riktig skolas behov generaliserade jag till ett system som inte är bundet till en enda skola.',
+    },
+    backgroundClosing:
+      'Sedan dess bygger jag vidare på egen hand. Servern som ett par av projekten här ovan står på är en ombyggd MacBook Pro från 2016 som numera kör Ubuntu, Docker och Cloudflare Tunnel — billigaste sättet jag hittade att lära mig drift på riktigt i stället för i en handledning.',
     contactHeading: 'Kontakt',
-    contact:
-      'Snabbast via mejl. Jag svarar på allt, även på sådant som visar sig inte leda någonstans.',
-    todoWork:
-      'Fyll i här: vilka språk, ramverk och verktyg du faktiskt arbetar i, och vad du helst vill jobba med. Var konkret — "React, TypeScript, Flutter, Cloudflare Workers" säger något; "webbutveckling" säger ingenting till den som söker efter en viss kompetens.',
-    todoBackground:
-      'Fyll i här: utbildning, tidigare arbeten eller den väg som tog dig hit. Om du bytt bana är det oftast värt att skriva ut varför — det är en fråga varje rekryterare ändå kommer att ställa, och du svarar bättre på den här än i ett nervöst samtal.',
+    availability:
+      'Jag utgår från Malmö och arbetar på plats, på distans eller hybrid. Finns rätt sammanhang någon annanstans flyttar jag gärna dit. Uppdrag fakturerar jag via eget bolag — frilans, korta som långa. Anställning är lika intressant.',
     todoCv:
       'Vill du ha ett nedladdningsbart CV: lägg PDF:en i public/ som cv-martin.pdf, så länkar jag in den härifrån. CV Forge kan ju exportera den åt dig.',
   },
@@ -27,14 +45,32 @@ const copy = {
     intro:
       'I am Martin, and I build web services and mobile apps. Appfinningar is the domain I keep them on, not a company. What sits under Projects are not sketches or coursework — they are running, and you can click in and try them.',
     workHeading: 'What I work with',
+    skills: [
+      { label: 'Languages', items: 'TypeScript, C#, Kotlin, Java, Swift, Dart, SQL' },
+      { label: 'Frontend', items: 'React, Next.js, React Native/Expo, Tailwind' },
+      { label: 'Backend', items: '.NET, Entity Framework, Postgres, Prisma, Drizzle, Supabase, Cloudflare D1' },
+      { label: 'Operations', items: 'Docker, GitHub Actions, Cloudflare Workers/Pages/R2/Tunnel, nginx, my own Ubuntu server' },
+    ],
+    workSummary:
+      'The weight sits in TypeScript and .NET, on top of several years of shipping mobile software in production — among other things as one of two developers on the Android side of the TYRA preschool app, which more than 2,500 preschools log into. What I am most used to is owning the whole chain: my own projects on the front page were designed, built and deployed by me alone, from data model to the machine they run on.',
+    workPreference: 'Fullstack in TypeScript for preference, ideally with mobile in the same codebase.',
     backgroundHeading: 'Background',
+    background: [
+      'I read physics at Lund but never took a degree. The thesis work — experimental molecular electronics at the nano department — was never presented: doing research and teaching was more fun than writing it up, and when the money ran out I had to take a job. That job turned out to be funeral director, and I stayed for thirteen years — the last three in the firm’s family law department as a paralegal working in family law. It is not the background that usually appears on a developer’s page, but they are two jobs where precision and meeting people at their most vulnerable are the work itself.',
+      'The way into development went through mobile: a vocational programme in iOS and Android development in Malmö, an internship at Cybercom building a voice-controlled prototype on Android, a freelance assignment for Head of Search as the sole app developer in Flutter, and then close to three years at Bayou in Lund as one of two developers on the Android side of the TYRA preschool app — a codebase that started in Java and grew on in Kotlin.',
+      'After Bayou I changed course. Curiosity is what drives me into new territory, and I wanted to widen out from the Android specialist into responsibility across a whole project: from idea to finished product, with the value to the customer at the centre and someone looking after the idea the whole way there. So in the autumn of 2025 I started a fullstack programme at Lexicon in Malmö to add backend and web to the mobile side — C#, .NET, Entity Framework and SQL, React and TypeScript — alongside a distance course in agile methods for developers at Lexicon in Stockholm.',
+    ],
+    placement: {
+      before: 'I did my placement at ',
+      link: 'Munka Folkhögskola',
+      after:
+        ', building the school’s new website in Next.js to replace an older WordPress one. The entire codebase is mine, and the site is live. That build also became the starting point for School CMS: what I learned from one real school’s needs I generalised into a system that is not tied to any single school.',
+    },
+    backgroundClosing:
+      'Since then I have carried on by myself. The server a couple of the projects above run on is a repurposed 2016 MacBook Pro now running Ubuntu, Docker and Cloudflare Tunnel — the cheapest way I found to learn operations for real rather than in a tutorial.',
     contactHeading: 'Contact',
-    contact:
-      'Email is fastest. I answer everything, including the things that turn out to lead nowhere.',
-    todoWork:
-      'Fill in here: the languages, frameworks and tools you actually work in, and what you would most like to work with. Be concrete — "React, TypeScript, Flutter, Cloudflare Workers" says something; "web development" says nothing to someone searching for a particular skill.',
-    todoBackground:
-      'Fill in here: education, previous work, or the path that brought you here. If you changed careers it is usually worth spelling out why — every recruiter will ask anyway, and you answer it better here than in a nervous interview.',
+    availability:
+      'I am based in Malmö and work on site, remotely or hybrid. If the right place is somewhere else, I will gladly move there. Assignments are invoiced through my own company — freelance, short or long. Employment is just as interesting.',
     todoCv:
       'Want a downloadable CV? Put the PDF in public/ as cv-martin.pdf and I will link it from here. CV Forge can export it for you.',
   },
@@ -47,18 +83,41 @@ const copy = {
   <p class="lede">{copy.intro}</p>
 
   <h2 class="section-heading">{copy.workHeading}</h2>
-  {/* TODO Martin: replace the box below with your own text and drop the .todo block. */}
-  <p class="todo"><strong>Att fylla i.</strong> {copy.todoWork}</p>
+  <ul class="skills">
+    {copy.skills.map(({ label, items }) => (
+      <li><strong>{label}:</strong> {items}</li>
+    ))}
+  </ul>
+  <p>{copy.workSummary}</p>
+  <p class="preference">{copy.workPreference}</p>
 
   <h2 class="section-heading">{copy.backgroundHeading}</h2>
-  {/* TODO Martin: replace the box below with your own text and drop the .todo block. */}
-  <p class="todo"><strong>Att fylla i.</strong> {copy.todoBackground}</p>
+  {copy.background.map((paragraph) => <p>{paragraph}</p>)}
+  <p>
+    {copy.placement.before}<a href="https://www.munkafolkhogskola.se/">{copy.placement.link}</a>{copy.placement.after}
+  </p>
+  <p>{copy.backgroundClosing}</p>
   <p class="todo"><strong>Valfritt.</strong> {copy.todoCv}</p>
 
   <h2 class="section-heading">{copy.contactHeading}</h2>
-  <p><span class="badge">{tr('contact.available')}</span></p>
-  <p>{copy.contact}</p>
-  <ul>
-    <li><a href="mailto:martin@appfinningar.se">martin@appfinningar.se</a></li>
-  </ul>
+  <p class="badge-row"><span class="badge">{tr('contact.available')}</span></p>
+  <p>{copy.availability}</p>
+  <div class="btn-row measure">
+    <a class="btn btn-primary" href="mailto:martin@appfinningar.se">{tr('contact.email')}</a>
+  </div>
 </div>
+
+<style>
+  /* The heading sits outside .prose, so it needs the same cap and auto margins
+     as the paragraphs below it — otherwise it starts at the page edge while
+     they start in the middle. Centred like the section headings; only the
+     running text stays left-aligned. */
+  h1 { max-width: var(--measure); margin-inline: auto; text-align: center; }
+
+  .skills { margin-bottom: 1.4rem; }
+
+  /* The one line that decides which jobs get in touch, so it is lifted out of
+     the muted body colour instead of closing the section as another grey
+     sentence. */
+  .preference { color: var(--text); font-size: 1.05rem; }
+</style>

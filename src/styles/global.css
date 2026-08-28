@@ -30,6 +30,12 @@
      so its content always lines up with the page's — they cannot drift apart. */
   --wrap-max: 72rem;
   --wrap-pad: 1.5rem;
+
+  /* Reading width for running text. One knob for the whole site: ledes, prose,
+     the todo boxes and the headings that share their column all read it, so
+     the column can be widened or narrowed in one place without anything
+     drifting out of line with the rest. */
+  --measure: 40rem;
 }
 
 * { box-sizing: border-box; }
@@ -95,7 +101,10 @@ h1 {
   color: transparent;
 }
 
-.lede { font-size: 1.1rem; color: var(--muted); margin: 0; max-width: 34rem; }
+/* Capped for readability, and centred with it. The cap alone leaves the column
+   pinned to the left edge of a 72rem page while the headings above it sit in
+   the middle — which reads as a mistake rather than as a choice. */
+.lede { font-size: 1.1rem; color: var(--muted); margin: 0 auto; max-width: var(--measure); }
 
 .section-heading {
   text-align: center;
@@ -150,10 +159,13 @@ h1 {
   box-shadow: 0 0 0 3px rgba(61, 139, 253, .2);
 }
 
-.prose p { color: var(--muted); max-width: 36rem; }
+/* Same reasoning as .lede: the column is capped, so it also has to be centred.
+   The text inside stays left-aligned — a centred rag on several paragraphs in a
+   row costs more in readability than the symmetry is worth. */
+.prose p { color: var(--muted); max-width: var(--measure); margin-inline: auto; }
 .prose strong { color: var(--text); font-weight: 600; }
 .prose h3 { margin: 2rem 0 .5rem; font-size: 1.05rem; letter-spacing: -.01em; }
-.prose ul { color: var(--muted); max-width: 36rem; padding-left: 1.2rem; }
+.prose ul { color: var(--muted); max-width: var(--measure); padding-left: 1.2rem; margin-inline: auto; }
 .prose li { margin-bottom: .4rem; }
 
 /* Fill-in marker for copy Martin is going to write himself. */
@@ -162,7 +174,7 @@ h1 {
   background: rgba(216, 178, 60, .075);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: .9rem 1.1rem;
-  font-size: .94rem; color: var(--muted); max-width: 36rem;
+  font-size: .94rem; color: var(--muted); max-width: var(--measure);
 }
 .todo strong { color: #e8cd77; }
 
@@ -198,13 +210,15 @@ h1 {
 
 .btn-row { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.8rem 0 0; }
 
-/* The grid works out its own column count: three on a large screen, two on a
-   medium one, one on a phone. No breakpoints to keep track of. */
+/* The grid works out its own column count: two on a large screen, one on a
+   phone. No breakpoints to keep track of. The 30rem floor is what makes it two
+   rather than three — the cards carry two paragraphs each now, and three
+   columns left a fourth card stranded alone on a second row. */
 .card-grid {
   display: grid; gap: 1.2rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
 }
 
 /* Line length stays short even on a wide page — the measure is the text, not the window. */
-.measure { max-width: 38rem; }
+.measure { max-width: var(--measure); margin-inline: auto; }
 .center { text-align: center; margin-left: auto; margin-right: auto; }

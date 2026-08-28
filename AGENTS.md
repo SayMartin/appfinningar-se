@@ -66,9 +66,12 @@ missing from there is also mislabelled for search engines.
 same object). Longer prose in the relevant `bodies/` component, in a local
 `copy` object. Do not mix the two — `ui.ts` has to stay readable at a glance.
 
-**Content as data:** `src/data/projects.ts` (project cards — omit `repo` when
-the code is not public, `tag` once the project is in real use) and
-`src/data/photos.ts` (alt text per filename).
+**Content as data:** `src/data/projects.ts` (project cards) and
+`src/data/photos.ts` (alt text per filename). A card carries two required pieces
+of prose: `description` says what the project does, `stack` says how it is
+built. Both are required — a card without a stack is exactly the half-finished
+impression the site is meant to avoid. `repo` is omitted when the code is not
+public, `tag` once the project is in real use.
 
 **Images:** `src/assets/photos/` is read with `import.meta.glob` in
 `PhotoGrid.astro` — add a file and it is on the site at the next build, no list

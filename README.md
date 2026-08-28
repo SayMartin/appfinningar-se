@@ -29,9 +29,10 @@ Requires Node 22.12 or later.
 
 ## Common changes
 
-**Add a project** — one object in `src/data/projects.ts`. Omit `repo` when the
-code is not public and no source link is rendered. Omit `tag` once the project
-is in real use.
+**Add a project** — one object in `src/data/projects.ts`. `description` says what
+the project does and `stack` says how it is built; both are required, in both
+languages. Omit `repo` when the code is not public and no source link is
+rendered. Omit `tag` once the project is in real use.
 
 **Add images** — drop the files into `src/assets/photos/` at full resolution and
 write alt text in `src/data/photos.ts`. The build warns about images with no alt

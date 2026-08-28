@@ -57,7 +57,7 @@ export const ui = {
     "contact.available": "Öppen för uppdrag och anställning",
     "contact.email": "Mejla mig",
     "contact.lede":
-      "Letar du efter någon som bygger färdigt? Hör av dig — jag svarar på allt.",
+      "Har du en idé som borde finnas på riktigt? Hör av dig — jag svarar.",
 
     "footer.holder": "Martin Persson  ·  "
   },
@@ -101,7 +101,7 @@ export const ui = {
     "contact.available": "Open to freelance work and employment",
     "contact.email": "Email me",
     "contact.lede":
-      "Looking for someone who finishes what they start? Get in touch — I answer everything.",
+      "Got an idea that ought to exist for real? Get in touch — I answer.",
 
     "footer.holder": "Martin Persson · ",
   },
