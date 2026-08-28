@@ -40,7 +40,11 @@
 
 * { box-sizing: border-box; }
 
-html { background: var(--bg-deep); }
+/* html deliberately has no background rule. Give it one and body's background
+   stops propagating to the canvas, and is painted as an ordinary element
+   background instead — which lands above every negative-z-index descendant,
+   hiding the grain below and the glow under the project cards. body already
+   sets background-color: var(--bg-deep), so the overscroll area stays right. */
 
 body {
   margin: 0;
@@ -201,12 +205,19 @@ h1 {
 }
 .btn-primary:hover { color: #fff; box-shadow: 0 14px 32px -10px rgba(61, 139, 253, .85); }
 
+/* The outlined button carries the same glow as the cards, a touch weaker than
+   the filled one — so the pair reads as one family of surfaces lit from the
+   same source, rather than as one lit button beside a flat one. */
 .btn-ghost {
   color: var(--text);
   border-color: var(--border);
   background: rgba(255, 255, 255, .04);
+  box-shadow: 0 10px 26px -14px rgba(61, 139, 253, .55);
 }
-.btn-ghost:hover { color: var(--text); border-color: var(--border-hov); background: var(--surface-hov); }
+.btn-ghost:hover {
+  color: var(--text); border-color: var(--border-hov); background: var(--surface-hov);
+  box-shadow: 0 14px 32px -14px rgba(61, 139, 253, .7);
+}
 
 .btn-row { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.8rem 0 0; }
 

@@ -71,7 +71,8 @@ same object). Longer prose in the relevant `bodies/` component, in a local
 of prose: `description` says what the project does, `stack` says how it is
 built. Both are required — a card without a stack is exactly the half-finished
 impression the site is meant to avoid. `repo` is omitted when the code is not
-public, `tag` once the project is in real use.
+public. `tag` is the card's state label — Live, Demo — and is omitted when there
+is nothing worth saying about the state.
 
 **Images:** `src/assets/photos/` is read with `import.meta.glob` in
 `PhotoGrid.astro` — add a file and it is on the site at the next build, no list

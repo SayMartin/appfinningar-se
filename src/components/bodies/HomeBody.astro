@@ -11,7 +11,10 @@ const tr = t(lang);
 
 <div class="intro">
   <p class="avail"><span class="badge">{tr('contact.available')}</span></p>
-  <h1>{tr('home.h1')}</h1>
+  <h1>
+    <span>{tr('home.h1')}</span>
+    <span>{tr('home.h1.line2')}</span>
+  </h1>
   <p class="lede measure">{tr('home.lede')}</p>
 
   <div class="btn-row">
@@ -49,8 +52,11 @@ const tr = t(lang);
      start at the same left edge instead of each finding its own. */
   .intro { max-width: var(--measure); margin: 1rem auto; }
   /* The heading is the exception, centred like every other heading on the
-     site — the text under it stays left-aligned. */
+     site — the text under it stays left-aligned. The two lines are spans set
+     to block rather than a <br>, so the break is a layout decision the
+     stylesheet owns and each half stays one selectable unit. */
   .intro h1 { text-align: center; }
+  .intro h1 span { display: block; }
   .avail { margin: 0 0 1.4rem; }
   .photo-lede { margin-bottom: 1.6rem; }
   .more { margin-top: 1.4rem; font-size: .95rem; }

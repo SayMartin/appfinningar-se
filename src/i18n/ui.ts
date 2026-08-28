@@ -32,7 +32,8 @@ export const ui = {
     "home.title": "Appfinningar — appar och webbtjänster av Martin",
     "home.description":
       "Portfolio för Martin: CV Forge för att skapa och exportera CV:n, ordspelet Wordlune, och ett publiceringssystem för folkhögskolor.",
-    "home.h1": "Små appar, byggda på fritiden.",
+    "home.h1": "Idéer som blir av.",
+    "home.h1.line2": "Kod som blir klar.",
     "home.lede":
       "Jag heter Martin och tycker om att koda. Webbtjänster och mobilappar blir hobbyprojekt som jag bygger färdigt i stället för att lämna som idé, och gärna i en ny techstack varje gång — det är så jag lär mig mest. Här är det som är igång just nu.",
 
@@ -76,7 +77,8 @@ export const ui = {
     "home.title": "Appfinningar — apps and web services by Martin",
     "home.description":
       "Martin's portfolio: CV Forge for building and exporting CVs, the word game Wordlune, and a publishing system for folk high schools.",
-    "home.h1": "Small apps, built in my spare time.",
+    "home.h1": "Ideas that happen.",
+    "home.h1.line2": "Code that gets finished.",
     "home.lede":
       "I'm Martin, and I like to code. Web services and mobile apps turn into hobby projects that I finish rather than leave as ideas — preferably in a new tech stack each time, since that is how I learn the most. Here's what's running right now.",
 

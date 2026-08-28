@@ -5,6 +5,12 @@ import type { Project } from '../data/projects';
 interface Props { project: Project; lang: Lang }
 const { project, lang } = Astro.props;
 const tr = t(lang);
+
+// One card points at this very site. A "visit the site" link there would take
+// the reader nowhere, so it is left out — the host line still names the
+// address. Derived from the URL rather than a flag on the project, so it can
+// never fall out of sync with what the card actually links to.
+const isThisSite = Astro.site && project.url === Astro.site.href;
 ---
 
 <article class="card glass">
@@ -17,30 +23,28 @@ const tr = t(lang);
   <p class="stack">{project.stack[lang]}</p>
 
   <p class="links">
-    <a href={project.url}>{tr('projects.visit')}</a>
+    {!isThisSite && <a href={project.url}>{tr('projects.visit')}</a>}
     <span class="host">{project.host}</span>
   </p>
 </article>
 
 <style>
+  /* No hover state on the card itself. Only the links inside it respond to a
+     pointer, and a card that lifts and lights up under one promises a click
+     target that is not there. */
   .card {
     position: relative;
     padding: 1.5rem 1.6rem;
-    transition: background .2s ease, border-color .2s ease, transform .2s ease;
   }
-  .card:hover {
-    background: var(--surface-hov);
-    border-color: var(--border-hov);
-    transform: translateY(-3px);
-  }
-  /* Faint glow that lights up under the card on hover. Sits behind it
-     (z-index: -1) so it can never cover the text. */
+  /* Faint glow under the card, lit all the time rather than on hover: the
+     cards are not clickable, so an effect that only appears under the pointer
+     would be a reward for pointing at something that does not respond. Sits
+     behind the card (z-index: -1) so it can never cover the text. */
   .card::after {
     content: ''; position: absolute; inset: -1px; border-radius: inherit;
-    z-index: -1; opacity: 0; transition: opacity .25s ease;
+    z-index: -1;
     box-shadow: 0 14px 40px -14px rgba(61, 139, 253, .45);
   }
-  .card:hover::after { opacity: 1; }
   h3 { margin: 0 0 .4rem; font-size: 1.18rem; letter-spacing: -.01em; }
   h3 a { color: var(--accent); text-decoration: none; }
   h3 a:hover { text-decoration: underline; }

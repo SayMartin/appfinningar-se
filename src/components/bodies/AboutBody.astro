@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import portrait from '../../assets/martin_foto.jpeg';
 import { t, type Lang } from '../../i18n/ui';
 
 interface Props { lang: Lang }
@@ -11,6 +13,7 @@ const copy = {
   sv: {
     intro:
       'Jag heter Martin och bygger webbtjänster och mobilappar. Appfinningar är domänen jag samlar dem under, inget företag. Det som ligger under Projekt är inte skisser eller kursuppgifter — det är saker som är i drift och går att klicka sig in i och prova.',
+    portraitAlt: 'Martin, med glasögon och blårutig skjorta, framför en kvällshimmel.',
     workHeading: 'Vad jag arbetar med',
     skills: [
       { label: 'Språk', items: 'TypeScript, C#, Kotlin, Java, Swift, Dart, SQL' },
@@ -38,12 +41,14 @@ const copy = {
     contactHeading: 'Kontakt',
     availability:
       'Jag utgår från Malmö och arbetar på plats, på distans eller hybrid. Finns rätt sammanhang någon annanstans flyttar jag gärna dit. Uppdrag fakturerar jag via eget bolag — frilans, korta som långa. Anställning är lika intressant.',
+    onRequest: 'CV och referenser lämnar jag gärna på förfrågan.',
     todoCv:
       'Vill du ha ett nedladdningsbart CV: lägg PDF:en i public/ som cv-martin.pdf, så länkar jag in den härifrån. CV Forge kan ju exportera den åt dig.',
   },
   en: {
     intro:
       'I am Martin, and I build web services and mobile apps. Appfinningar is the domain I keep them on, not a company. What sits under Projects are not sketches or coursework — they are running, and you can click in and try them.',
+    portraitAlt: 'Martin, in glasses and a blue checked shirt, against an evening sky.',
     workHeading: 'What I work with',
     skills: [
       { label: 'Languages', items: 'TypeScript, C#, Kotlin, Java, Swift, Dart, SQL' },
@@ -71,6 +76,7 @@ const copy = {
     contactHeading: 'Contact',
     availability:
       'I am based in Malmö and work on site, remotely or hybrid. If the right place is somewhere else, I will gladly move there. Assignments are invoiced through my own company — freelance, short or long. Employment is just as interesting.',
+    onRequest: 'A CV and references are gladly provided on request.',
     todoCv:
       'Want a downloadable CV? Put the PDF in public/ as cv-martin.pdf and I will link it from here. CV Forge can export it for you.',
   },
@@ -78,6 +84,18 @@ const copy = {
 ---
 
 <h1>{tr('about.heading')}</h1>
+
+<div class="portrait-frame">
+  <Image
+    class="portrait"
+    src={portrait}
+    alt={copy.portraitAlt}
+    width={160}
+    densities={[1, 2]}
+    format="webp"
+    quality={80}
+  />
+</div>
 
 <div class="prose">
   <p class="lede">{copy.intro}</p>
@@ -102,6 +120,7 @@ const copy = {
   <h2 class="section-heading">{copy.contactHeading}</h2>
   <p class="badge-row"><span class="badge">{tr('contact.available')}</span></p>
   <p>{copy.availability}</p>
+  <p>{copy.onRequest}</p>
   <div class="btn-row measure">
     <a class="btn btn-primary" href="mailto:martin@appfinningar.se">{tr('contact.email')}</a>
   </div>
@@ -113,6 +132,40 @@ const copy = {
      they start in the middle. Centred like the section headings; only the
      running text stays left-aligned. */
   h1 { max-width: var(--measure); margin-inline: auto; text-align: center; }
+
+  .portrait-frame {
+    position: relative;
+    width: 10rem; height: 10rem;
+    margin: 0 auto 2rem;
+  }
+
+  /* The halo: a larger disc of the brand gradient, blurred, behind the photo.
+     Both layers are positioned with non-negative z-index on purpose. A
+     z-index: -1 disc would disappear: html carries its own background, so
+     body's background is painted as an ordinary element background — which
+     sits above every negative-z-index descendant, halo included. */
+  .portrait-frame::before {
+    content: '';
+    position: absolute; inset: -9%;
+    z-index: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    filter: blur(12px);
+    opacity: .6;
+  }
+
+  /* Round on purpose. The source is cropped out of a group photo, so the
+     corners still hold a stranger's hair and something red — a circle removes
+     both without touching the file. object-fit keeps the face centred whatever
+     the source aspect happens to be. */
+  .portrait {
+    display: block;
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+  }
 
   .skills { margin-bottom: 1.4rem; }
 
