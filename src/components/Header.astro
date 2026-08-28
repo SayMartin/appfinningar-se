@@ -49,16 +49,34 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
       */}
     </div>
 
-    <nav aria-label={tr('site.name')}>
-      {nav.map(({ key, label }) => (
-        <a href={routes[key][lang]} aria-current={key === current ? 'page' : undefined}>{label}</a>
-      ))}
+    <div class="nav-group">
+      {/* A checkbox drives the mobile menu because the site ships no
+          JavaScript. The input is the state, the label is the button, and
+          :checked reveals the panel — all of it in CSS. It is hidden from
+          sight but stays in the tab order, so the menu opens from the
+          keyboard too. */}
+      <input class="nav-toggle" type="checkbox" id="nav-toggle" />
+      <label class="burger" for="nav-toggle">
+        <span class="sr-only">{tr('nav.menu')}</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </label>
 
-    {/* Goes to the same page in the other language, not to the home page. */}
+      <nav aria-label={tr('site.name')}>
+        {nav.map(({ key, label }) => (
+          <a href={routes[key][lang]} aria-current={key === current ? 'page' : undefined}>{label}</a>
+        ))}
+      </nav>
+
+      {/* Outside the menu on purpose: switching language is not navigation
+          within the site, and it should stay reachable without opening
+          anything. Goes to the same page in the other language, not to the
+          home page. */}
       <a class="lang" href={routes[current][other]} lang={other} hreflang={other} title={tr('nav.language')}>
         {other === 'en' ? 'EN' : 'SV'}
       </a>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -135,6 +153,9 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
     vertical-align: 0;
   }
 
+  /* Anchor for the mobile panel, which is positioned against this box. */
+  .nav-group { position: relative; display: flex; align-items: center; gap: 1.4rem; }
+
   nav { display: flex; align-items: baseline; gap: 1.4rem; }
   nav a {
     font-size: .95rem; color: var(--muted); text-decoration: none;
@@ -149,4 +170,41 @@ const other: Lang = lang === 'sv' ? 'en' : 'sv';
     transition: border-color .2s ease, background .2s ease;
   }
   .lang:hover { border-color: var(--border-hov); background: var(--surface-hov); }
+
+  /* Off screen but still focusable — hidden with display: none it would drop
+     out of the tab order and the menu would be unreachable by keyboard. */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    margin: -1px; padding: 0; border: 0;
+    clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+  }
+  .nav-toggle { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+  /* The button exists only below the breakpoint; above it the links are shown
+     outright and there is nothing to toggle. */
+  .burger { display: none; }
+  .burger svg { width: 1.6rem; height: 1.6rem; }
+
+  @media (max-width: 40rem) {
+    .burger {
+      display: inline-flex; align-items: center;
+      color: var(--muted); cursor: pointer;
+      padding: .2rem; border-radius: 8px;
+      transition: color .2s ease, background .2s ease;
+    }
+    .burger:hover { color: var(--text); background: var(--surface-hov); }
+    /* The focus ring belongs on the label, since the input it belongs to is
+       the thing nobody can see. */
+    .nav-toggle:focus-visible + .burger { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    nav { display: none; }
+    .nav-toggle:checked ~ nav {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+      position: absolute; top: calc(100% + .9rem); right: 0; z-index: 6;
+      min-width: 11rem; padding: 1rem 1.2rem;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .7);
+    }
+  }
 </style>

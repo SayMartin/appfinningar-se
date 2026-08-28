@@ -28,6 +28,7 @@ export const ui = {
     // 'nav.photos': 'Foto',
     "nav.skipToContent": "Hoppa till innehållet",
     "nav.language": "Byt språk",
+    "nav.menu": "Meny",
 
     "home.title": "Appfinningar — appar och webbtjänster av Martin",
     "home.description":
@@ -73,6 +74,7 @@ export const ui = {
     // 'nav.photos': 'Photos',
     "nav.skipToContent": "Skip to content",
     "nav.language": "Change language",
+    "nav.menu": "Menu",
 
     "home.title": "Appfinningar — apps and web services by Martin",
     "home.description":

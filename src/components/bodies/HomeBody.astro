@@ -18,8 +18,7 @@ const tr = t(lang);
   <p class="lede measure">{tr('home.lede')}</p>
 
   <div class="btn-row">
-    <a class="btn btn-primary" href={`#${tr('projects.heading').toLowerCase()}`}>{tr('projects.heading')}</a>
-    <a class="btn btn-ghost" href={routes.about[lang]}>{tr('about.readMore')}</a>
+    <a class="btn" href={routes.about[lang]}>{tr('about.readMore')}</a>
   </div>
 </div>
 
@@ -42,8 +41,8 @@ const tr = t(lang);
 <h2 class="section-heading">{tr('about.heading')}</h2>
 <p class="lede measure">{tr('contact.lede')}</p>
 <div class="btn-row measure">
-  <a class="btn btn-primary" href={routes.about[lang]}>{tr('about.readMore')}</a>
-  <a class="btn btn-ghost" href="mailto:martin@appfinningar.se">{tr('contact.email')}</a>
+  <a class="btn" href={routes.about[lang]}>{tr('about.readMore')}</a>
+  <a class="btn" href="mailto:martin@appfinningar.se">{tr('contact.email')}</a>
 </div>
 
 <style>
