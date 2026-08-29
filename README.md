@@ -56,6 +56,13 @@ translations rather than duplicate content. `x-default` points at Swedish.
 Code — comments, identifiers, commit messages — is English only. Swedish is the
 site's copy, not the source around it.
 
+## Use
+
+The code is here to be read, and you are welcome to learn from it or lift a
+solution out of it. The content is not: the text, the photographs and the
+portrait are Martin's own and are not for reuse. No licence is granted beyond
+that — the site is a personal portfolio, not a template.
+
 ## Deploy
 
 A push to `main` builds and uploads automatically via GitHub Actions.
@@ -65,7 +72,7 @@ Two secrets must exist in the repo (Settings → Secrets and variables → Actio
 | Name | Value |
 |---|---|
 | `CLOUDFLARE_API_TOKEN` | Cloudflare token with the permission Account · Cloudflare Pages · Edit |
-| `CLOUDFLARE_ACCOUNT_ID` | `CLOUDFLARE_ACCOUNT_ID` |
+| `CLOUDFLARE_ACCOUNT_ID` | The account id, found in the Cloudflare dashboard URL or under Workers & Pages → Account details |
 
 Without them the job fails with `it's necessary to set a CLOUDFLARE_API_TOKEN
 environment variable`. The log's `with:` block then shows only `command:` —

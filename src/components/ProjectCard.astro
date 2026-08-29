@@ -24,6 +24,7 @@ const isThisSite = Astro.site && project.url === Astro.site.href;
 
   <p class="links">
     {!isThisSite && <a href={project.url}>{tr('projects.visit')}</a>}
+    {project.repo && <a href={project.repo}>{tr('projects.source')}</a>}
     <span class="host">{project.host}</span>
   </p>
 </article>
@@ -57,7 +58,9 @@ const isThisSite = Astro.site && project.url === Astro.site.href;
     margin-top: .9rem; padding-top: .8rem;
     border-top: 1px solid var(--border);
   }
-  .links { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem; margin-bottom: 0; }
+  /* The gap only has to separate two links when a card carries both; the
+     host is pushed to the far end by its own auto margin either way. */
+  .links { display: flex; flex-wrap: wrap; align-items: baseline; gap: .9rem; margin-bottom: 0; }
   .links a { font-size: .9rem; }
   .host {
     margin-left: auto; font-size: .84rem; opacity: .75;

@@ -40,6 +40,7 @@ export const ui = {
 
     "projects.heading": "Projekt",
     "projects.visit": "Besök sajten",
+    "projects.source": "Källkod",
 
     "photos.heading": "Foto",
     "photos.lede": "Bilder jag tagit.",
@@ -86,6 +87,7 @@ export const ui = {
 
     "projects.heading": "Projects",
     "projects.visit": "Visit site",
+    "projects.source": "Source",
 
     "photos.heading": "Photography",
     "photos.lede": "Pictures I have taken.",

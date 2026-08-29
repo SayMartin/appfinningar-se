@@ -36,9 +36,6 @@ export const projects: Project[] = [
     },
   },
 
-  // TODO Martin: add the repo URL here if the code is public. Without `repo`
-  // the card simply renders without a source link, which is the right
-  // behaviour when the repo is private.
   {
     id: 'school-cms',
     name: 'School CMS',
@@ -60,7 +57,6 @@ export const projects: Project[] = [
     name: 'CV Forge',
     url: 'https://cv-forge.appfinningar.se/',
     host: 'cv-forge.appfinningar.se',
-    // repo: 'https://github.com/SayMartin/cv-forge',
     description: {
       sv: 'Ett verktyg för att skapa, hantera och exportera CV:n. Du lägger in erfarenheter, utbildningar och färdigheter en gång i ett innehållsbibliotek, och sätter sedan ihop flera olika CV:n av samma material — egen layout, egna färger, egen ordning på avsnitten, utskriftsfärdig A4-PDF. Har du redan ett CV som PDF läses det in automatiskt och fyller biblioteket åt dig.',
       en: 'A tool for creating, managing and exporting CVs. You enter your experience, education and skills once into a content library, then assemble several different CVs from the same material — its own layout, its own colours, its own section order, a print-ready A4 PDF. Already have a CV as a PDF? It is parsed automatically and fills the library for you.',
@@ -76,7 +72,6 @@ export const projects: Project[] = [
     name: 'Wordlune',
     url: 'https://wordlune.appfinningar.se/',
     host: 'wordlune.appfinningar.se',
-    // repo: 'https://github.com/SayMartin/Wordlune',
     description: {
       sv: 'Ett ordspel där ledtråden är vad du vet, inte hur många ord du kan. Varje hemligt ord hör till en kategori — afrikanska huvudstäder, matvaror, bilmärken — och kategorin visas. Bokstäverna smalnar av fältet, allmänbildningen stänger det. Tre spellägen: träning mot valda ämnen, en veckotävling, och dueller i realtid där två spelare jagar samma ord. Finns på svenska, engelska och franska.',
       en: 'A word game where the clue is what you know, not how many words you know. Every hidden word belongs to a category — African capitals, groceries, car brands — and the category is shown. The letters narrow the field; general knowledge closes it. Three modes: practice against the subjects you pick, a weekly competition, and real-time duels where two players chase the same word. In Swedish, English and French.',
@@ -93,6 +88,7 @@ export const projects: Project[] = [
     tag: { sv: 'Du är här', en: 'You are here' },
     url: 'https://appfinningar.se/',
     host: 'appfinningar.se',
+    repo: 'https://github.com/SayMartin/appfinningar-se',
     description: {
       sv: 'Sajten du läser just nu. Portfolio och projektsida på två språk, byggd som en övning i att skicka så lite som möjligt: ingen JavaScript når besökaren, texterna finns i båda språken i samma källa, och språkväxlaren tar dig till samma sida i stället för att kasta tillbaka dig till förstasidan.',
       en: 'The site you are reading right now. A portfolio and project page in two languages, built as an exercise in shipping as little as possible: no JavaScript reaches the visitor, the copy for both languages lives in one source, and the language switcher takes you to the same page rather than throwing you back to the front.',
